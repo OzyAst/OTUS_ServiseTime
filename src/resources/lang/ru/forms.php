@@ -21,6 +21,13 @@ return [
         ]
     ],
 
+    'address' => [
+        'add' => [
+            'address' => 'Адрес',
+            'contacts' => 'Контакты',
+        ]
+    ],
+
     'feedback' => [
         'add' => [
             'name' => 'Имя',

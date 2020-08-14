@@ -49,6 +49,7 @@ Route::group([
             Route::resources(['procedure' => '\App\Http\Controllers\ProcedureController']);
             Route::resources(['record' => '\App\Http\Controllers\RecordController']);
             Route::resources(['feedback' => '\App\Http\Controllers\FeedbackController']);
+            Route::resources(['address' => '\App\Http\Controllers\BusinessAddressController']);
 
             Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'index']);
             Route::get('/statistic', [\App\Http\Controllers\StatisticController::class, 'index'])
