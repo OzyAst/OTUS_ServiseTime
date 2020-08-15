@@ -18,8 +18,13 @@
         <tr>
             <th scope="row">{{ $loop->iteration }}</th>
             <td>{{ $address->address }}</td>
-            <td></td>
             <td>
+                @include('business-contact._list', ["contacts" => $address->contacts])
+            </td>
+            <td>
+                <a href="{{ route('contact.create', ['address' => $address->id]) }}"
+                   class="btn btn-sm btn-outline-success"><i class="fa fa-phone-alt"></i></a>
+
                 <a href="{{ route('address.edit', ['address' => $address->id]) }}"
                    class="btn btn-sm btn-outline-info"><i class="fa fa-pen-alt"></i></a>
 

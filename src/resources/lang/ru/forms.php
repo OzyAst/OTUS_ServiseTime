@@ -28,6 +28,13 @@ return [
         ]
     ],
 
+    'contact' => [
+        'add' => [
+            'contact' => 'Контакт',
+            'type_id' => 'Тип',
+        ]
+    ],
+
     'feedback' => [
         'add' => [
             'name' => 'Имя',

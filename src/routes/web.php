@@ -51,6 +51,10 @@ Route::group([
             Route::resources(['feedback' => '\App\Http\Controllers\FeedbackController']);
             Route::resources(['address' => '\App\Http\Controllers\BusinessAddressController']);
 
+            Route::resources(['contact' => '\App\Http\Controllers\BusinessContactController']);
+            Route::get('/contact/create/{address}', [\App\Http\Controllers\BusinessContactController::class, 'create'])
+            ->name('contact.create');
+
             Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'index']);
             Route::get('/statistic', [\App\Http\Controllers\StatisticController::class, 'index'])
                 ->name('statistic.index');
