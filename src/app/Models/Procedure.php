@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \App\Models\Business|null $business
  * @property-read \App\Models\User|null $worker
+ * @property-read \Illuminate\Database\Eloquent\Relations\HasMany $times
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Procedure newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Procedure newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Procedure query()
@@ -58,5 +60,14 @@ class Procedure extends Model
     public function business()
     {
         return $this->hasOne(Business::class, 'id', 'business_id');
+    }
+
+    /**
+     * Times
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function times()
+    {
+        return $this->hasMany(ProcedureTime::class, 'procedure_id', 'id');
     }
 }

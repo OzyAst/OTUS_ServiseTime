@@ -11,9 +11,11 @@
 |
 */
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BusinessContactController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProcedureTimeController;
 
 /**
  * Все клиентские страницы
@@ -51,8 +53,16 @@ Route::group([
             Route::resources(['feedback' => '\App\Http\Controllers\FeedbackController']);
             Route::resources(['address' => '\App\Http\Controllers\BusinessAddressController']);
 
-            Route::resources(['contact' => '\App\Http\Controllers\BusinessContactController']);
-            Route::get('/contact/create/{address}', [\App\Http\Controllers\BusinessContactController::class, 'create'])
+            Route::resource('time', ProcedureTimeController::class)->only(['store']);
+            Route::get('/time/create/{procedure}', [ProcedureTimeController::class, 'create'])
+                ->name('time.create');
+            Route::get('/time/edit/{procedure}', [ProcedureTimeController::class, 'edit'])
+                ->name('time.edit');
+            Route::patch('/time/{procedure}', [ProcedureTimeController::class, 'update'])
+                ->name('time.update');
+
+            Route::resource('contact',BusinessContactController::class)->except(['create']);
+            Route::get('/contact/create/{address}', [BusinessContactController::class, 'create'])
             ->name('contact.create');
 
             Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'index']);

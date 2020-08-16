@@ -24,6 +24,11 @@
             <td>{{ $procedure->price }}</td>
             <td>{{ $procedure->people_count }}</td>
             <td>
+                <a href="{{ route('time.create', ['procedure' => $procedure->id]) }}"
+                   class="btn btn-sm btn-outline-{{ $procedure->times->count() ? "info" : "success"}}">
+                    <i class="far fa-clock"></i>
+                </a>
+
                 <a href="{{ route('procedure.show', ['procedure' => $procedure->id]) }}"
                    class="btn btn-sm btn-outline-primary"><i class="fa fa-eye"></i></a>
 

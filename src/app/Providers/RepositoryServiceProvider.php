@@ -23,6 +23,8 @@ use App\Services\Localize\Repositories\LocalizeRepositoryInterface;
 use App\Services\Localize\Repositories\SessionLocalizeRepository;
 use App\Services\Procedures\Repositories\EloquentProcedureRepository;
 use App\Services\Procedures\Repositories\ProcedureRepositoryInterface;
+use App\Services\ProcedureTimes\Repositories\EloquentProcedureTimeRepository;
+use App\Services\ProcedureTimes\Repositories\ProcedureTimeRepositoryInterface;
 use App\Services\Records\Repositories\EloquentRecordRepository;
 use App\Services\Records\Repositories\RecordRepositoryInterface;
 use App\Services\Users\Repositories\EloquentUserRepository;
@@ -48,6 +50,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BusinessAddressRepositoryInterface::class, EloquentBusinessAddressRepository::class);
         $this->app->bind(BusinessContactTypeRepositoryInterface::class, EloquentBusinessContactTypeRepository::class);
         $this->app->bind(BusinessContactRepositoryInterface::class, EloquentBusinessContactRepository::class);
+        $this->app->bind(ProcedureTimeRepositoryInterface::class, EloquentProcedureTimeRepository::class);
 
         // Admin
         $this->app->bind(AdminBusinessRepositoryInterface::class, AdminEloquentBusinessRepository::class);
