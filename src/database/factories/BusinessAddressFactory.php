@@ -20,5 +20,7 @@ use Illuminate\Support\Str;
 $factory->define(\App\Models\BusinessAddress::class, function (Faker $faker) {
     return [
         'address' => $faker->address,
+        'latitude' => $faker->latitude,
+        'longitude' => $faker->longitude,
     ];
 });

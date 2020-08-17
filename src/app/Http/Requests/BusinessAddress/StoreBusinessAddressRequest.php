@@ -30,6 +30,8 @@ class StoreBusinessAddressRequest extends FormRequest
     {
         return [
             "address" => 'required|string',
+            "latitude" => 'required|string',
+            "longitude" => 'required|string',
         ];
     }
 

@@ -15,12 +15,12 @@
 
     <div class="row">
         @isset($business->address)
-            <div class="col-md-5">
-                <div class="list-group ml-2">
+            <div class="col-md-12 map_container">
+                <div class="list-group map_address">
                     <ul class="list-unstyled text-small">
                         <a href="#" class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ $business->address->address }}</h5>
+                                <h5 class="mb-1" id="map_address">{{ $business->address->address }}</h5>
                             </div>
                             @foreach($business->address->contacts as $contact)
                                 <p class="mb-1">{{ $contact->contact }}</p>
@@ -28,11 +28,9 @@
                         </a>
                     </ul>
                 </div>
-            </div>
-            <div class="col-md-7">
-                <div style="background-color: #b6c6d1">
-                    <span class="text-center">Google map</span>
-                </div>
+
+                <div id="map" style="background-color: #b6c6d1" data-lat="{{ $business->address->latitude }}"
+                     data-lng="{{ $business->address->longitude }}"></div>
             </div>
         @else
             <div class="text-center flex-grow-1 pb-4">

@@ -17,6 +17,9 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="/css/fontawesome.min.css">
+
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRWbgswuO3sl8vFrowfR2fJ58UEhx0Ci4&callback=initMap"
+            defer></script>
     @yield('styles')
 </head>
 <body class="d-flex flex-column">
@@ -29,6 +32,7 @@
 
 <script src="{{ mix('/js/app.js') }}"></script>
 @stack('scripts')
+<script src="/js/pages/map-google.js"></script>
 
 </body>
 </html>

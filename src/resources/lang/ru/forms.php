@@ -25,6 +25,8 @@ return [
         'add' => [
             'address' => 'Адрес',
             'contacts' => 'Контакты',
+            'latitude' => 'Широта',
+            'longitude' => 'Долгота',
         ]
     ],
 
