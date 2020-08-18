@@ -16,7 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <!-- Style -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/css/vendors/fontawesome.min.css">
+    <link rel="stylesheet" href="/css/vendors/fullcalendar.min.css">
 
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRWbgswuO3sl8vFrowfR2fJ58UEhx0Ci4&callback=initMap"
             defer></script>
@@ -32,7 +33,9 @@
 
 <script src="{{ mix('/js/app.js') }}"></script>
 @stack('scripts')
+<script src="/js/vendors/fullcalendar.min.js"></script>
 <script src="/js/pages/map-google.js"></script>
+<script src="/js/pages/timetable.js"></script>
 
 </body>
 </html>

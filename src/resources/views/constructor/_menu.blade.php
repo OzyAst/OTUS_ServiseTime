@@ -10,6 +10,7 @@
         <a class="p-2 text-dark" href="#procedures">{{ __('constructor.procedure') }}</a>
         <a class="p-2 text-dark" href="#addresses">{{ __('constructor.address') }}</a>
         <a class="p-2 text-dark" href="#feedback">{{ __('constructor.feedback') }}</a>
+        <a class="p-2 text-dark" href="#timetable">{{ __('constructor.timetable') }}</a>
     </nav>
     <a class="btn btn-outline-primary" href="#">Sign up</a>
 </div>

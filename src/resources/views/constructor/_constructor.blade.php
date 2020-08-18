@@ -23,6 +23,8 @@
 
 @include('constructor._address')
 
+@include('constructor._timetable')
+
 @include('constructor._feedback')
 
 @include('constructor._footer')
