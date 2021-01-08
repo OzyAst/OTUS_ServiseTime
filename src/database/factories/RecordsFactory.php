@@ -17,7 +17,7 @@ use Carbon\Carbon;
 */
 
 $factory->define(\App\Models\Record::class, function (Faker $faker) {
-    $date_start = $faker->dateTimeBetween('-1 month');
+    $date_start = $faker->dateTimeBetween('-1 week', '+1 week');
     $date_end = Carbon::createFromTimestamp(rand(200, 6200) + $date_start->getTimestamp());
     $user = \App\Models\User::inRandomOrder()->first();
 

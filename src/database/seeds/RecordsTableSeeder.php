@@ -18,7 +18,7 @@ class RecordsTableSeeder extends Seeder
         foreach (Business::all() as $business) {
             foreach (Procedure::whereBusinessId($business->id)->get() as $procedure) {
                 foreach (User::all() as $user) {
-                    factory(Record::class, 1)->create([
+                    factory(Record::class, 5)->create([
                         'business_id' => $business->id,
                         'procedure_id' => $procedure->id,
                         'price' => $procedure->price,
