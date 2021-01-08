@@ -32,7 +32,7 @@
 @include('blocks._footer')
 
 <script src="{{ mix('/js/app.js') }}"></script>
-@stack('scripts')
+@yield('scripts')
 
 </body>
 </html>
