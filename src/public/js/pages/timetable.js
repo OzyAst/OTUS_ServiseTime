@@ -1,24 +1,16 @@
-"use strict";
+$('body').on('click', '#timetable_modal_show', function () {
+    var calendarEl = $("#procedure_timetable #calendar");
+    var procedure = $(this).attr("data-procedure_id");
+    var date_start = calendar.view.activeStart.toLocaleDateString("ru");
+    var date_end = calendar.view.activeEnd.toLocaleDateString("ru");
 
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek',
-        slotDuration: '00:05:00',
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth timeGridWeek,timeGridDay'
-        },
-        droppable: true,
-        locale: 'ru',
-        navLinks: true,
-        editable: true,
-        eventLimit: true,
-        slotEventOverlap: false,
-        allDaySlot: false,
-        height: 'auto',
-    });
+    if (procedure !== calendarEl.attr("data-procedure")) {
+        clear_calendar();
+    } else {
+        return;
+    }
 
-    calendar.render();
+    calendarEl.attr("data-procedure", procedure);
+    refresh_calendar(procedure, date_start, date_end);
 });
+
