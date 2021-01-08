@@ -48,6 +48,8 @@ class Record extends Model
     const STATUS_CANCELED = 2;
     const STATUS_MOVED = 3;
 
+    const GET_RECORDS_FOR_DAYS = 1;
+
     public $fillable = [
         'id',
         'business_id',

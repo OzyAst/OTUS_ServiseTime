@@ -3,6 +3,7 @@
 namespace App\Services\Records\Repositories;
 
 use App\Models\Record;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 interface RecordRepositoryInterface
@@ -20,6 +21,15 @@ interface RecordRepositoryInterface
      * @return Collection|null
      */
     public function findByBusinessId(int $business_id): ?Collection;
+
+    /**
+     * Найти записи по Procedure ID
+     * @param int $procedure_id
+     * @param $date_start
+     * @param $date_end
+     * @return Collection|null
+     */
+    public function findByProcedureId(int $procedure_id, Carbon $date_start, Carbon $date_end): ?Collection;
 
     /**
      * Кол-во записей за выбраный период
