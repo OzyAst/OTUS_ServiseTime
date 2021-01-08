@@ -14,7 +14,7 @@ class EloquentProcedureRepository implements ProcedureRepositoryInterface
         return Procedure::find($id);
     }
 
-    public function findByBusinessId(int $business_id): ?Collection
+    public function getByBusinessId(int $business_id): ?Collection
     {
         return Procedure::whereBusinessId($business_id)->get();
     }
@@ -43,5 +43,10 @@ class EloquentProcedureRepository implements ProcedureRepositoryInterface
     public function delete(Procedure $procedure): bool
     {
         return $procedure->delete();
+    }
+
+    public function findByBusinessId(int $business_id, int $procedure_id): ?Procedure
+    {
+        return Procedure::whereId($procedure_id)->whereBusinessId($business_id)->first();
     }
 }
