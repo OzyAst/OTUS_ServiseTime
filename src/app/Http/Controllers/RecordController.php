@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Records\RecordService;
+use Illuminate\Support\Facades\Auth;
 
 class RecordController extends Controller
 {
@@ -29,7 +30,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = $this->service->getMyRecord();
+        $records = $this->service->getUserRecords(Auth::user());
         return view('records.index', [
             'records' => $records
         ]);

@@ -3,6 +3,7 @@
 namespace App\Services\Records;
 
 use App\Models\Record;
+use App\Models\User;
 use App\Services\Records\Repositories\RecordRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,10 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class RecordService
 {
 
-    /**
-     * @var RecordRepositoryInterface
-     */
-    private $repository;
+    private RecordRepositoryInterface $repository;
 
     public function __construct(
         RecordRepositoryInterface $repository
@@ -24,15 +22,16 @@ class RecordService
 
     /**
      * Списк всех записей для салона
+     * @param User $user
      * @return Collection|null
      */
-    public function getMyRecord(): ?Collection
+    public function getUserRecords(User $user): ?Collection
     {
         if (Auth::guest()) {
             return new Collection();
         }
 
-        return $this->repository->findByBusinessId(Auth::user()->business->id);
+        return $this->repository->findByBusinessId($user->business->id);
     }
 
     /**
