@@ -2,54 +2,69 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Business;
-use App\Services\Businesses\BusinessService;
+use App\Console\Commands\cacheWarmingRules\BusinessesWarmingRule;
+use App\Console\Commands\cacheWarmingRules\CacheWarmingRule;
 use Illuminate\Console\Command;
 
 class CacheWarming extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'cache:warming';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Прогрев кэша';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
+     * Классы с правилами для прогрева кэша
      */
-    public function __construct()
+    private array $cacheRules = [
+        BusinessesWarmingRule::class,
+    ];
+
+    /**
+     * Вернет сервис который содержит метод использующий кэш
+     * @param string $class
+     * @return \Illuminate\Contracts\Foundation\Application|mixed
+     */
+    private function getService(string $class)
     {
-        parent::__construct();
+        return app($class);
     }
 
     /**
      * Execute the console command.
-     *
      * @return mixed
      */
-    public function handle(BusinessService $businessService)
+    public function handle()
     {
-        $businesses = Business::all();
-        $bar = $this->output->createProgressBar(count($businesses));
+        $cacheRules = $this->getCacheRules();
+        $bar = $this->output->createProgressBar(count($this->cacheRules));
         $bar->start();
 
-        foreach ($businesses as $business) {
-            $businessService->get($business->id);
+        foreach ($cacheRules as $rule) {
+            /**
+             * @var CacheWarmingRule $rule
+             */
+            $class = $rule->getClass();
+            $method = $rule->getMethod();
+            $params = $rule->getIterationParams();
+
+            foreach ($params as $param) {
+                $this->getService($class)->$method(...$param);
+            }
             $bar->advance();
         }
 
         $bar->finish();
         $this->line("");
         $this->info("Кэш успешно прогрет");
+    }
+
+    /**
+     * Вернет правила прогрева по очередно
+     * @return iterable
+     */
+    private function getCacheRules(): iterable
+    {
+        foreach ($this->cacheRules as $rule) {
+            yield new $rule;
+        }
     }
 }
