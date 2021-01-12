@@ -1,18 +1,20 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Feedback\StoreFeedbackRequest;
+use App\Services\Feedback\FeedbackService;
+//use Illuminate\Support\Facades\App;
 
 class FeedbackController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private FeedbackService $service;
+
+    public function __construct(
+        FeedbackService $service
+    )
     {
+        $this->service = $service;
     }
 
     /**
@@ -22,5 +24,16 @@ class FeedbackController extends Controller
     public function index()
     {
         return view('feedback.index');
+    }
+
+    /**
+     * Добавление записи
+     * @param StoreFeedbackRequest $request
+     * @return mixed
+     */
+    public function store(StoreFeedbackRequest $request)
+    {
+        $this->service->create($request->getFormData());
+        return app::make('redirect')->back();
     }
 }
