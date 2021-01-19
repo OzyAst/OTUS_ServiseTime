@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\CacheWarmingRules;
+namespace App\Services\Cache\CacheWarmingRules;
 
 use App\Models\Business;
 use App\Services\Businesses\BusinessService;
