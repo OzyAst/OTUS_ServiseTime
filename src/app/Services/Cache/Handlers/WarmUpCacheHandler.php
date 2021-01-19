@@ -2,7 +2,7 @@
 
 namespace App\Services\Cache\Handlers;
 
-use App\Service\Cache\CacheWarmingRules\CacheWarmingRule;
+use App\Services\Cache\CacheWarmingRules\CacheWarmingRule;
 
 class WarmUpCacheHandler
 {
