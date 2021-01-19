@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var \App\Models\Business $business
+ */
+
 $route = 'feedback.store';
 $route_params = [];
 $method = "POST";
@@ -13,6 +17,8 @@ $method = "POST";
         <form action="{{ route($route, $route_params) }}" method="POST">
             @csrf
             @method($method)
+
+            <input type="hidden" name="business_id" value="{{ $business->id }}">
 
             <div class="form-row">
                 <div class="col">

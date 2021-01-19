@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Feedback\StoreFeedbackRequest;
 use App\Services\Feedback\FeedbackService;
-//use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\App;
 
 class FeedbackController extends Controller
 {
@@ -34,6 +34,6 @@ class FeedbackController extends Controller
     public function store(StoreFeedbackRequest $request)
     {
         $this->service->create($request->getFormData());
-        return app::make('redirect')->back();
+        return App::make('redirect')->back();
     }
 }

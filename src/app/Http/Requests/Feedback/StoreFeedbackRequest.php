@@ -30,6 +30,7 @@ class StoreFeedbackRequest extends FormRequest
     {
         return [
             "email" => 'required|email|max:255',
+            "business_id" => 'required|integer',
             "name" => 'required|string|max:255',
             "text" => 'required|string',
         ];
