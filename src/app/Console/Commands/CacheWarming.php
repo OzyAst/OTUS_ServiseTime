@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Console\Commands\cacheWarmingRules\BusinessesWarmingRule;
-use App\Console\Commands\cacheWarmingRules\CacheWarmingRule;
+use App\Console\Commands\CacheWarmingRules\BusinessesWarmingRule;
+use App\Console\Commands\CacheWarmingRules\CacheWarmingRule;
 use Illuminate\Console\Command;
 
 class CacheWarming extends Command
