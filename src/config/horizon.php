@@ -175,7 +175,7 @@ return [
                 ],
                 'balance' => 'simple',
                 'processes' => 10,
-                'tries' => 1,
+                'tries' => 3,
                 'nice' => 0,
             ],
         ],
