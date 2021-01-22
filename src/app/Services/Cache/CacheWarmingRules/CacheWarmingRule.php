@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\cacheWarmingRules;
+namespace App\Services\Cache\CacheWarmingRules;
 
 interface CacheWarmingRule
 {
