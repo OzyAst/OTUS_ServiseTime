@@ -24,7 +24,7 @@ class CreateFeedbackTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('procedures', function (Blueprint $table) {
+        Schema::table('feedback', function (Blueprint $table) {
             $table->index('business_id');
             $table->foreign('business_id')
                 ->references('id')

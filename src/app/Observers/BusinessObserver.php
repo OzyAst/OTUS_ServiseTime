@@ -33,7 +33,7 @@ class BusinessObserver
         $key = CacheKeyGeneration::getKey(Business::CACHE_PREFIX, $id);
 
         Cache::forget($key);
-        $this->service->get($id);
+        $this->service->findCachedBusiness($id);
     }
 
     /**
