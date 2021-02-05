@@ -28,9 +28,10 @@ class StatisticService
     {
         $date = Carbon::today();
 
-        if (Auth::guest()) {
+        if (Auth::guest() || !Auth::user()->business) {
             return null;
         }
+
 
         return (new StatisticRecordsDTO(
             $this->recordRepository->countRecords(Auth::user()->business->id, $date, $date),
