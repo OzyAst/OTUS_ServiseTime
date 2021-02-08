@@ -52,7 +52,7 @@ class BusinessService
      * @param int $id
      * @return Collection|null
      */
-    public function get(int $id): ?Business
+    public function findCachedBusiness(int $id): ?Business
     {
         $ttl = Business::CACHE_TTL;
         $prefix = Business::CACHE_PREFIX;
@@ -60,12 +60,7 @@ class BusinessService
 
         return Cache::remember($key, $ttl, function () use ($id) {
             $business = $this->repository->find($id);
-            $business->procedures;
-            $business->type;
-
-            if ($business->address) {
-                $business->address->contacts;
-            }
+            $business->load(['procedures', 'type', 'address.contacts']);
 
             return $business;
         });
