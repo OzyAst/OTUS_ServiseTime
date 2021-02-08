@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $business_id
  * @property string $address
+ * @property float $latitude
+ * @property float $longitude
  *
  * @property-read Business|null $business
  * @property-read BusinessContact|null $contacts
@@ -28,6 +30,8 @@ class BusinessAddress extends Model
         'id',
         'business_id',
         'address',
+        'latitude',
+        'longitude',
     ];
 
     public $timestamps = false;

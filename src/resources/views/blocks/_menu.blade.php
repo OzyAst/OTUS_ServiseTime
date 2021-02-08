@@ -12,6 +12,7 @@
 {{--            <a class="p-2 text-dark" href="{{ route('staff.index') }}">{{ __('buttons.menu.staff') }}</a>--}}
             <a class="p-2 text-dark" href="{{ route('record.index') }}">{{ __('buttons.menu.records') }}</a>
             <a class="p-2 text-dark" href="{{ route('procedure.index') }}">{{ __('buttons.menu.procedures') }}</a>
+            <a class="p-2 text-dark" href="{{ route('address.index') }}">{{ __('buttons.menu.address') }}</a>
             <a class="p-2 text-dark" href="{{ route('statistic.index') }}">{{ __('buttons.menu.statistic') }}</a>
         @endcan
     </ul>

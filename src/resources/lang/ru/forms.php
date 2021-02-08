@@ -21,6 +21,31 @@ return [
         ]
     ],
 
+    'address' => [
+        'add' => [
+            'address' => 'Адрес',
+            'contacts' => 'Контакты',
+            'latitude' => 'Широта',
+            'longitude' => 'Долгота',
+        ]
+    ],
+
+    'contact' => [
+        'add' => [
+            'contact' => 'Контакт',
+            'type_id' => 'Тип',
+        ]
+    ],
+
+    'time' => [
+        'add' => [
+            'day' => 'День недели',
+            'start' => 'Начало',
+            'end' => 'Конец',
+            'day_off' => 'Выходной',
+        ]
+    ],
+
     'feedback' => [
         'add' => [
             'name' => 'Имя',

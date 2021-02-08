@@ -23,7 +23,12 @@
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>Продолжительность: <i class="far fa-clock"></i> {{ $procedure->duration }} мин.</li>
                         </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Записаться</button>
+
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary" id="timetable_modal_show"
+                                data-toggle="modal" data-target="#procedure_timetable"
+                                data-procedure_id="{{ $procedure->id }}">
+                            Записаться
+                        </button>
                     </div>
                 </div>
             @empty
@@ -39,4 +44,19 @@
         </div>
         @endif
     </div>
+
+    <div class="modal fade" id="procedure_timetable" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @include('constructor._timetable')
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+@section('scripts')
+<script src="{{ asset('/js/pages/pages.js') }}"></script>
+<script src="{{ asset('/js/pages/timetable.js') }}"></script>
+@stop

@@ -49,3 +49,19 @@ footer p {
     backdrop-filter: blur(10px);
     border-radius: 0.25rem;
 }
+
+/** Карта на странице визитки **/
+.map_container {
+    position: relative;
+    height: 500px;
+}
+.map_address {
+    position: absolute;
+    z-index: 2;
+    left: 35px;
+    bottom: 20px;
+    width: 350px;
+}
+#map {
+    height: 100%;
+}

@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <!-- Style -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/css/vendors/fontawesome.min.css">
     @yield('styles')
 </head>
 <body class="d-flex flex-column">
@@ -32,7 +32,7 @@
 @include('blocks._footer')
 
 <script src="{{ mix('/js/app.js') }}"></script>
-@stack('scripts')
+@yield('scripts')
 
 </body>
 </html>

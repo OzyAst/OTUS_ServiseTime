@@ -17,6 +17,8 @@ class CreateBusinessAddressesTable extends Migration
             $table->id();
             $table->unsignedbigInteger('business_id');
             $table->text('address');
+            $table->decimal('latitude', 10, 7);
+            $table->decimal('longitude', 10, 7);
         });
 
         Schema::table('business_addresses', function (Blueprint $table) {

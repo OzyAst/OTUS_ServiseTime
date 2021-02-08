@@ -76,6 +76,16 @@ class ProcedureService
      */
     public function getMyProcedures(): ?Collection
     {
-        return $this->repository->findByBusinessId(Auth::user()->business->id);
+        return $this->repository->getByBusinessId(Auth::user()->business->id);
+    }
+
+    /**
+     * Данные процедуры по ID
+     * @param $procedure_id
+     * @return Procedure|null
+     */
+    public function getMyProcedure($procedure_id): ?Procedure
+    {
+        return $this->repository->findByBusinessId(Auth::user()->business->id, $procedure_id);
     }
 }

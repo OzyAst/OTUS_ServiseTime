@@ -11,14 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class BusinessController extends Controller
 {
-    /**
-     * @var BusinessService
-     */
-    private $service;
-    /**
-     * @var BusinessTypeService
-     */
-    private $typeService;
+    private BusinessService $service;
+    private BusinessTypeService $typeService;
 
     /**
      * Create a new controller instance.
@@ -41,7 +35,7 @@ class BusinessController extends Controller
     public function index()
     {
         return view('business.index', [
-            'business' => $this->service->getMyBusiness()
+            'business' => $this->service->getMyBusiness(),
         ]);
     }
 

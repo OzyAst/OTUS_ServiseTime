@@ -26,6 +26,8 @@
 
     @includeWhen($business->address, 'constructor._address')
 
+    @include('constructor._timetable')
+
     @include('constructor._feedback')
 
 @stop
