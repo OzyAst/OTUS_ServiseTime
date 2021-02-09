@@ -27,15 +27,8 @@ class DateParamsRequest extends FormRequest
     public function rules()
     {
         return [
-            "date_start" => 'date_format:"d.m.Y"',
-            "date_end" => 'date_format:"d.m.Y"',
+            "date_start" => ['date_format:"d.m.Y"', 'nullable'],
+            "date_end" => ['date_format:"d.m.Y"', 'nullable'],
         ];
-    }
-
-    public function getFormData()
-    {
-        $data = parent::getFromData();
-
-        return $data;
     }
 }
