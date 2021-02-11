@@ -11,7 +11,6 @@
 |
 */
 
-use App\Http\Controllers\TimetableController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessContactController;
@@ -29,9 +28,6 @@ Route::group([
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/localize/{locale}', [\App\Http\Controllers\LocalizeController::class, 'setLocale'])
         ->name('localize.set');
-
-    // API получение записей для календаря (пакет)
-    Route::get('/timetable/{procedure_id}', [TimetableController::class, 'index']);
 
     /**
      * Страницы закрытые

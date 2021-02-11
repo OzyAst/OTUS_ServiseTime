@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Timetable;
+namespace App\Http\Requests\Record;
 
 use App\Http\Requests\FormRequest;
 
