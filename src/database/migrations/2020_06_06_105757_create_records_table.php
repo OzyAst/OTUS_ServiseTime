@@ -21,8 +21,8 @@ class CreateRecordsTable extends Migration
             $table->dateTime('date_start');
             $table->dateTime('date_end');
             $table->unsignedbigInteger('user_create');
-            $table->unsignedbigInteger('user_update');
-            $table->tinyInteger('status')
+            $table->unsignedbigInteger('user_update')->nullable();
+            $table->tinyInteger('status')->default(0)
                 ->comment("0 - не завершена, 1 - завершена, 2 - отменена, 3 - перенесена");
             $table->decimal('price', 8, 2)
                 ->comment("Окончательная цена, т.к. после оказания услуг (со временем) цена может вырасти.");

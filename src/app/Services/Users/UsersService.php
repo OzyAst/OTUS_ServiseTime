@@ -7,6 +7,7 @@ use App\Services\Users\DTOs\RegisterDTO;
 use App\Services\Users\Handlers\UserRegisterHandler;
 use App\Services\Users\Repositories\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersService
 {
@@ -40,6 +41,7 @@ class UsersService
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'api_token' => Str::random(60),
         ]);
 
         return $this->userRegisterHandler->handle($user);
