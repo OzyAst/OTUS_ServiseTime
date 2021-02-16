@@ -27,7 +27,7 @@ class RecordService
      */
     public function getUserRecords(User $user): ?Collection
     {
-        if (Auth::guest()) {
+        if (Auth::guest() || !$user->business) {
             return new Collection();
         }
 
