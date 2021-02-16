@@ -1,0 +1,187 @@
+swagger: "2.0"
+info:
+  description: "Api, доступное в сервисе [ServiceTime](http://service-time.ru)"
+  version: "1.0.0"
+  title: "ServiceTime API"
+host: "service-time.ru"
+basePath: "/api/v1"
+tags:
+  - name: "record"
+    description: "Записи на процедуры"
+    externalDocs:
+      # description: "Find out more"
+      url: "http://service-time.ru/api"
+  - name: "procedure"
+    description: "Процедуры"
+schemes:
+  - "http"
+paths:
+  /record:
+    post:
+      tags:
+        - "record"
+      summary: "Добавить новую запись"
+      description: ""
+      operationId: "addRecord"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Объект записи для добавления новой записи"
+          required: true
+          schema:
+            $ref: "#/definitions/RecordForm"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ApiSuccessResponse"
+      security:
+        - api_key: []
+    put:
+      tags:
+        - "record"
+      summary: "Редактировать запись"
+      description: ""
+      operationId: "updateRecord"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Объект записи для редактирования записи"
+          required: true
+          schema:
+            $ref: "#/definitions/RecordForm"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ApiSuccessResponse"
+        "422":
+          description: "Unprocessable Entity"
+        "404":
+          description: "Not found"
+      security:
+        - api_key: []
+  /record/{recordId}:
+    get:
+      tags:
+        - "record"
+      summary: "Найти запись по ID"
+      operationId: "getRecordById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "recordId"
+          in: "path"
+          description: "ID записи"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Record"
+        "404":
+          description: "Not found"
+      security:
+        - api_key: []
+    delete:
+      tags:
+        - "record"
+      summary: "Удалить запись"
+      description: ""
+      operationId: "deleteRecord"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "recordId"
+          in: "path"
+          description: "ID записи для удаления"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ApiSuccessResponse"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Not found"
+      security:
+        - api_key: []
+  /procedure/{procedureId}/record:
+    get:
+      tags:
+        - "procedure"
+      summary: "Получить записи для процедуры"
+      description: ""
+      operationId: "recordForProcedure"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "procedureId"
+          in: "path"
+          description: "ID процедуры"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Record"
+          # schema:
+          #   $ref: "#/definitions/ApiResponse"
+      security:
+        - api_key: []
+
+
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Record:
+    type: "object"
+    properties:
+      id:
+        example: "1233"
+      procedure_id:
+        example: "8"
+      date_start:
+        example: "2021-02-15 02:14:29"
+      date_end:
+        example: "2021-02-15 03:32:07"
+  RecordForm:
+    type: "object"
+    required:
+      - "procedure_id"
+      - "date_start"
+    properties:
+      procedure_id:
+        type: "integer"
+        format: "int64"
+      date_start:
+        type: "string"
+        example: "2021-02-15 02:14:29"
+      date_end:
+        type: "string"
+        example: "2021-02-15 03:32:07"
+  ApiSuccessResponse:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
