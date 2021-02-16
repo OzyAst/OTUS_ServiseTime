@@ -52,7 +52,7 @@ class HomeController extends Controller
     public function home()
     {
         $statisticToday = $this->statisticService->getStatusToday();
-        $records = $this->recordService->getMyRecord();
+        $records = $this->recordService->getUserRecords(Auth::user());
 
         return view('home.index', [
             'records' => $records,

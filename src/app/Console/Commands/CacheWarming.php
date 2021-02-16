@@ -2,53 +2,43 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Business;
-use App\Services\Businesses\BusinessService;
+use App\Services\Cache\CacheWarmingRules\BusinessesWarmingRule;
+use App\Services\Cache\Handlers\WarmUpCacheHandler;
 use Illuminate\Console\Command;
 
 class CacheWarming extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'cache:warming';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Прогрев кэша';
 
+    private WarmUpCacheHandler $service;
+
     /**
-     * Create a new command instance.
-     *
-     * @return void
+     * Классы с правилами для прогрева кэша
      */
-    public function __construct()
+    private array $cacheRules = [
+        BusinessesWarmingRule::class,
+    ];
+
+    private function getService(): WarmUpCacheHandler
     {
-        parent::__construct();
+        return $this->service ?? app(WarmUpCacheHandler::class);
     }
 
     /**
      * Execute the console command.
-     *
      * @return mixed
      */
-    public function handle(BusinessService $businessService)
+    public function handle()
     {
-        $businesses = Business::all();
-        $bar = $this->output->createProgressBar(count($businesses));
+        $bar = $this->output->createProgressBar(count($this->cacheRules));
+
         $bar->start();
-
-        foreach ($businesses as $business) {
-            $businessService->get($business->id);
+        $this->getService()->handle($this->cacheRules, function () use ($bar) {
             $bar->advance();
-        }
-
+        });
         $bar->finish();
+
         $this->line("");
         $this->info("Кэш успешно прогрет");
     }

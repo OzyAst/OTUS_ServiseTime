@@ -14,11 +14,6 @@ class BusinessController extends Controller
     private BusinessService $service;
     private BusinessTypeService $typeService;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct(
         BusinessService $service,
         BusinessTypeService $typeService
@@ -46,7 +41,7 @@ class BusinessController extends Controller
      */
     public function show($id)
     {
-        $business = $this->service->get($id);
+        $business = $this->service->findCachedBusiness($id);
         return view('business.show', [
             'business' => $business
         ]);
