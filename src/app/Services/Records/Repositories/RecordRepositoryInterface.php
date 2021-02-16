@@ -3,17 +3,30 @@
 namespace App\Services\Records\Repositories;
 
 use App\Models\Record;
+use App\Services\Records\DTO\RecordCreateHandlerDTO;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 interface RecordRepositoryInterface
 {
+    public function create(RecordCreateHandlerDTO $DTO): ?Record;
+    public function update(Record $procedure): bool;
+    public function delete(Record $procedure): bool;
+
     /**
      * Найти запись по ID
      * @param int $id
      * @return Record|null
      */
     public function find(int $id): ?Record;
+
+    /**
+     * Найти запись клиента или вернуть ошибку 404
+     * @param int $id
+     * @param int $user_id
+     * @return Record|null
+     */
+    public function findByClientIdOrFail(int $id, int $user_id): ?Record;
 
     /**
      * Найти записи по Business ID

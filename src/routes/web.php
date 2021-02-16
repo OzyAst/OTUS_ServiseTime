@@ -11,7 +11,6 @@
 |
 */
 
-use App\Http\Controllers\TimetableController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessContactController;
@@ -29,9 +28,6 @@ Route::group([
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/localize/{locale}', [\App\Http\Controllers\LocalizeController::class, 'setLocale'])
         ->name('localize.set');
-
-    // API получение записей для календаря (пакет)
-    Route::get('/timetable/{procedure_id}', [TimetableController::class, 'index']);
 
     /**
      * Страницы закрытые
@@ -57,7 +53,7 @@ Route::group([
             Route::resources(['feedback' => '\App\Http\Controllers\FeedbackController']);
             Route::resources(['address' => '\App\Http\Controllers\BusinessAddressController']);
 
-            Route::resource('time', ProcedureTimeController::class)->only(['store']);
+            Route::resource('time', '\App\Http\Controllers\ProcedureTimeController')->only(['store']);
             Route::get('/time/create/{procedure}', [ProcedureTimeController::class, 'create'])
                 ->name('time.create');
             Route::get('/time/edit/{procedure}', [ProcedureTimeController::class, 'edit'])
@@ -65,7 +61,7 @@ Route::group([
             Route::patch('/time/{procedure}', [ProcedureTimeController::class, 'update'])
                 ->name('time.update');
 
-            Route::resource('contact',BusinessContactController::class)->except(['create']);
+            Route::resource('contact','\App\Http\Controllers\BusinessContactController')->except(['create']);
             Route::get('/contact/create/{address}', [BusinessContactController::class, 'create'])
             ->name('contact.create');
 
