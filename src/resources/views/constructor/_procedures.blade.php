@@ -7,8 +7,6 @@
 <section id="procedures">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">{{ __('headers.constructor.procedure') }}</h1>
-        <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap
-            example. It’s built with default Bootstrap components and utilities with little customization.</p>
     </div>
 
     <div class="container pb-4">
@@ -21,19 +19,22 @@
                     <div class="card-body">
                         <h1 class="card-title pricing-card-title">{{ $procedure->price }} р.</h1>
                         <ul class="list-unstyled mt-3 mb-4">
-                            <li>Продолжительность: <i class="far fa-clock"></i> {{ $procedure->duration }} мин.</li>
+                            <li>
+                                {{ __('procedure.table.duration') }}:
+                                <i class="far fa-clock"></i> {{ $procedure->duration }} мин.
+                            </li>
                         </ul>
 
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary" id="timetable_modal_show"
                                 data-toggle="modal" data-target="#procedure_timetable"
                                 data-procedure_id="{{ $procedure->id }}">
-                            Записаться
+                            {{ __('buttons.procedure.recording') }}
                         </button>
                     </div>
                 </div>
             @empty
                 <div class="text-center flex-grow-1">
-                    <a href="{{ route('procedure.create') }}">Добавить процедуры ...</a>
+                    <a href="{{ route('procedure.create') }}">{{ __('buttons.procedure.add_construct') }}</a>
                 </div>
             @endforelse
         </div>

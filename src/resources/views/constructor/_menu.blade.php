@@ -12,5 +12,5 @@
         <a class="p-2 text-dark" href="#feedback">{{ __('constructor.feedback') }}</a>
         <a class="p-2 text-dark" href="#timetable">{{ __('constructor.timetable') }}</a>
     </nav>
-    <a class="btn btn-outline-primary" href="#">Sign up</a>
+    <a class="btn btn-outline-primary" href="#">{{  __('buttons.menu.login') }}</a>
 </div>
