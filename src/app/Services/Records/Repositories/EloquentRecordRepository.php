@@ -76,4 +76,10 @@ class EloquentRecordRepository implements RecordRepositoryInterface
         return Record::where('id', $id)
             ->where('client_id', $user_id)->firstOrFail();
     }
+
+    public function findByBusinessIdOrFail(int $record_id, int $business_id): Record
+    {
+        return Record::where('id', $record_id)->whereBusinessId($business_id)
+            ->firstOrFail();
+    }
 }

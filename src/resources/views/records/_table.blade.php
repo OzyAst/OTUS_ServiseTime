@@ -1,7 +1,7 @@
 <?php
 /**
- * @var \App\Models\Procedure $procedure
- * @var $records
+ * @var \App\Models\Record $record
+ * @var array $records
  */
 ?>
 

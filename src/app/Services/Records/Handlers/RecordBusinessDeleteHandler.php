@@ -2,13 +2,12 @@
 
 namespace App\Services\Records\Handlers;
 
-use App\Models\User;
 use App\Services\Records\Repositories\RecordRepositoryInterface;
 
 /**
- * Удаление записи
+ * Удаление записи бизнеса
  */
-class RecordDeleteHandler
+class RecordBusinessDeleteHandler
 {
     private RecordRepositoryInterface $repository;
 
@@ -19,9 +18,9 @@ class RecordDeleteHandler
         $this->repository = $repository;
     }
 
-    public function handle(int $record_id, User $user): bool
+    public function handle(int $record_id, int $business_id): bool
     {
-        $record = $this->repository->findByClientIdOrFail($record_id, $user->id);
+        $record = $this->repository->findByBusinessIdOrFail($record_id, $business_id);
 
         return $this->repository->delete($record);
     }

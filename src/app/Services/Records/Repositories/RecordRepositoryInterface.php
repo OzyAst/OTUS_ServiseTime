@@ -29,6 +29,14 @@ interface RecordRepositoryInterface
     public function findByClientIdOrFail(int $id, int $user_id): ?Record;
 
     /**
+     * Найти запись для бизнеса или вернуть ошибку 404
+     * @param int $record_id
+     * @param int $business_id
+     * @return Record
+     */
+    public function findByBusinessIdOrFail(int $record_id, int $business_id): Record;
+
+    /**
      * Найти записи по Business ID
      * @param int $business_id
      * @return Collection|null

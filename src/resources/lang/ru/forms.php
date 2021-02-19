@@ -21,6 +21,16 @@ return [
         ]
     ],
 
+    'records' => [
+        'add' => [
+            'client_id' => 'Клиент',
+            'date_start' => 'Время начала',
+            'date_end' => 'Время окончания',
+            'status' => 'Статус',
+            'price' => 'Цена',
+        ]
+    ],
+
     'address' => [
         'add' => [
             'address' => 'Адрес',

@@ -10,8 +10,9 @@
 
 @can('accessBusinessPanel')
     @section('header_button')
-        <a href="{{ route("business.edit", ['business' => $business->id]) }}" type="button" class="btn btn-outline-primary"><i class="fa fa-pen-alt"></i></a>
-        <button type="button" class="btn btn-outline-info">{{ __('buttons.business.settings') }}</button>
+        <a href="{{ route("business.edit", ['business' => $business->id]) }}" type="button" class="btn btn-outline-primary">
+            <i class="fa fa-pen-alt"></i> {{ __('buttons.business.settings') }}
+        </a>
     @stop
 @endcan
 

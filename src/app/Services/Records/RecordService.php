@@ -5,9 +5,12 @@ namespace App\Services\Records;
 use App\Models\Record;
 use App\Models\User;
 use App\Services\Records\DTO\RecordCreateDTO;
+use App\Services\Records\DTO\RecordUpdateBusinessDTO;
 use App\Services\Records\DTO\RecordUpdateDTO;
+use App\Services\Records\Handlers\RecordBusinessDeleteHandler;
+use App\Services\Records\Handlers\RecordBusinessUpdateHandler;
 use App\Services\Records\Handlers\RecordCreateHandler;
-use App\Services\Records\Handlers\RecordDeleteHandler;
+use App\Services\Records\Handlers\RecordClientDeleteHandler;
 use App\Services\Records\Handlers\RecordUpdateHandler;
 use App\Services\Records\Repositories\RecordRepositoryInterface;
 use Carbon\Carbon;
@@ -20,18 +23,24 @@ class RecordService
     private RecordRepositoryInterface $repository;
     private RecordCreateHandler $createHandler;
     private RecordUpdateHandler $updateHandler;
-    private RecordDeleteHandler $deleteHandler;
+    private RecordClientDeleteHandler $deleteClientHandler;
+    private RecordBusinessDeleteHandler $deleteBusinessHandler;
+    private RecordBusinessUpdateHandler $businessUpdateHandler;
 
     public function __construct(
         RecordRepositoryInterface $repository,
         RecordCreateHandler $createHandler,
         RecordUpdateHandler $updateHandler,
-        RecordDeleteHandler $deleteHandler
+        RecordBusinessUpdateHandler $businessUpdateHandler,
+        RecordClientDeleteHandler $deleteClientHandler,
+        RecordBusinessDeleteHandler $deleteBusinessHandler
     ) {
         $this->repository = $repository;
         $this->createHandler = $createHandler;
         $this->updateHandler = $updateHandler;
-        $this->deleteHandler = $deleteHandler;
+        $this->deleteClientHandler = $deleteClientHandler;
+        $this->deleteBusinessHandler = $deleteBusinessHandler;
+        $this->businessUpdateHandler = $businessUpdateHandler;
     }
 
     /**
@@ -87,7 +96,7 @@ class RecordService
     }
 
     /**
-     * Обновить запись
+     * Обновить запись для пользователя
      * @param array $data
      * @param int $record_id
      * @param User $user
@@ -99,12 +108,34 @@ class RecordService
     }
 
     /**
-     * Удалить запись
+     * Обновить запись для бизнеса
+     * @param array $data
+     * @param int $record_id
+     * @param User $user
+     */
+    public function updateForBusiness(array $data, int $record_id, User $user): void
+    {
+        $DTO = RecordUpdateBusinessDTO::fromArray($data);
+        $this->businessUpdateHandler->handle($DTO, $record_id, $user);
+    }
+
+    /**
+     * Удалить запись клиента
      * @param int $record_id
      * @param User $user
      */
     public function deleteUserRecord(int $record_id, User $user): void
     {
-        $this->deleteHandler->handle($record_id, $user);
+        $this->deleteClientHandler->handle($record_id, $user);
+    }
+
+    /**
+     * Удалить запись бизнеса
+     * @param int $record_id
+     * @param User $user
+     */
+    public function deleteBusinessRecord(int $record_id, User $user): void
+    {
+        $this->deleteBusinessHandler->handle($record_id, $user->business->id);
     }
 }

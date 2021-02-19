@@ -2,26 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Record\UpdateAdminRecordRequest;
+use App\Http\Requests\Record\UpdateBusinessRecordRequest;
+use App\Models\Record;
 use App\Services\Records\RecordService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class RecordController extends Controller
 {
-    /**
-     * @var RecordService
-     */
-    private $service;
+    private RecordService $recordService;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct(
-        RecordService $service
+        RecordService $recordService
     )
     {
-        $this->service = $service;
+        $this->recordService = $recordService;
     }
 
     /**
@@ -30,9 +26,56 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = $this->service->getUserRecords(Auth::user());
+        $records = $this->recordService->getUserRecords(Auth::user());
         return view('records.index', [
             'records' => $records
         ]);
+    }
+
+    /**
+     * Страница с деталями записи
+     * @param Record $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Record $record)
+    {
+        return view('records.view', [
+            'record' => $record,
+        ]);
+    }
+
+    /**
+     * Форма редактирование записи
+     * @param Record $record
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(Record $record)
+    {
+        return view('records.edit', [
+            'record' => $record,
+        ]);
+    }
+
+    /**
+     * Редактирование записи
+     * @param UpdateBusinessRecordRequest $request
+     * @param $record_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateBusinessRecordRequest $request, $record_id)
+    {
+        $this->recordService->updateForBusiness($request->getFormData(), $record_id, Auth::user());
+        return Redirect::to(action([self::class, 'index']));
+    }
+
+    /**
+     * Удалить запись
+     * @param int $record_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $record_id)
+    {
+        $this->recordService->deleteBusinessRecord($record_id, Auth::user());
+        return Redirect::to(action([self::class, 'index']));
     }
 }
