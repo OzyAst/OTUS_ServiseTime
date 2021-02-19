@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Records\RecordService;
 use App\Services\Statistic\StatisticService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -51,8 +52,15 @@ class HomeController extends Controller
      */
     public function home()
     {
+        $date_start = Carbon::today();
+        $date_end = Carbon::tomorrow();
+
         $statisticToday = $this->statisticService->getStatusToday();
-        $records = $this->recordService->getUserRecords(Auth::user());
+        $records = $this->recordService->getRecordsFormBusinessInDate(
+            Auth::user()->business->id,
+            $date_start,
+            $date_end
+        );
 
         return view('home.index', [
             'records' => $records,

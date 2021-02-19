@@ -79,7 +79,7 @@ class RecordController extends Controller
     {
         $status = $request->getFormData()['status'];
         $this->recordService->changeStatusForBusiness($status, $record_id, Auth::user());
-        return Redirect::to(action([self::class, 'index']));
+        return Redirect::back();
     }
 
     /**

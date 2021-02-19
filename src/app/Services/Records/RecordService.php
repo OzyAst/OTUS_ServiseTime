@@ -62,6 +62,18 @@ class RecordService
     }
 
     /**
+     * Получить записи за промежуток времени для бизнеса
+     * @param int $business_id
+     * @param Carbon $date_start
+     * @param Carbon $date_end
+     * @return Collection|null
+     */
+    public function getRecordsFormBusinessInDate(int $business_id, Carbon $date_start, Carbon $date_end)
+    {
+        return $this->repository->findByBusinessIdInDate($business_id, $date_start, $date_end);
+    }
+
+    /**
      * Список записей для процедуры
      * @param int $procedure_id
      * @param Carbon|null $date_start

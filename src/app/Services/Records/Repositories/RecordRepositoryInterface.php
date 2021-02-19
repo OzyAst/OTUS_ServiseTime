@@ -44,6 +44,15 @@ interface RecordRepositoryInterface
     public function findByBusinessId(int $business_id): ?Collection;
 
     /**
+     * Найти записи по Business ID за промежуток времени
+     * @param int $business_id
+     * @param Carbon $date_start
+     * @param Carbon $date_end
+     * @return Collection|null
+     */
+    public function findByBusinessIdInDate(int $business_id, Carbon $date_start, Carbon $date_end): ?Collection;
+
+    /**
      * Найти записи по Procedure ID
      * @param int $procedure_id
      * @param $date_start
