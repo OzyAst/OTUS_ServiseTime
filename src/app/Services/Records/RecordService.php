@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\Records\DTO\RecordCreateDTO;
 use App\Services\Records\DTO\RecordUpdateBusinessDTO;
 use App\Services\Records\DTO\RecordUpdateDTO;
+use App\Services\Records\Handlers\ChangeStatusRecordBusinessHandler;
 use App\Services\Records\Handlers\RecordBusinessDeleteHandler;
 use App\Services\Records\Handlers\RecordBusinessUpdateHandler;
 use App\Services\Records\Handlers\RecordCreateHandler;
@@ -26,6 +27,7 @@ class RecordService
     private RecordClientDeleteHandler $deleteClientHandler;
     private RecordBusinessDeleteHandler $deleteBusinessHandler;
     private RecordBusinessUpdateHandler $businessUpdateHandler;
+    private ChangeStatusRecordBusinessHandler $changeStatusRecordBusinessHandler;
 
     public function __construct(
         RecordRepositoryInterface $repository,
@@ -33,7 +35,8 @@ class RecordService
         RecordUpdateHandler $updateHandler,
         RecordBusinessUpdateHandler $businessUpdateHandler,
         RecordClientDeleteHandler $deleteClientHandler,
-        RecordBusinessDeleteHandler $deleteBusinessHandler
+        RecordBusinessDeleteHandler $deleteBusinessHandler,
+        ChangeStatusRecordBusinessHandler $changeStatusRecordBusinessHandler
     ) {
         $this->repository = $repository;
         $this->createHandler = $createHandler;
@@ -41,6 +44,7 @@ class RecordService
         $this->deleteClientHandler = $deleteClientHandler;
         $this->deleteBusinessHandler = $deleteBusinessHandler;
         $this->businessUpdateHandler = $businessUpdateHandler;
+        $this->changeStatusRecordBusinessHandler = $changeStatusRecordBusinessHandler;
     }
 
     /**
@@ -117,6 +121,17 @@ class RecordService
     {
         $DTO = RecordUpdateBusinessDTO::fromArray($data);
         $this->businessUpdateHandler->handle($DTO, $record_id, $user);
+    }
+
+    /**
+     * Обновить статус записи для бизнеса
+     * @param int $status
+     * @param int $record_id
+     * @param User $user
+     */
+    public function changeStatusForBusiness(int $status, int $record_id, User $user): void
+    {
+        $this->changeStatusRecordBusinessHandler->handle($status, $record_id, $user);
     }
 
     /**

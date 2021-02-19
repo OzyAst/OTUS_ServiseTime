@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Record;
+
 /**
  * @var \App\Models\Record $record
  * @var array $records
@@ -23,6 +26,41 @@
             <td>{{ $record->client->name }}</td>
             <td>{{ date("d M H:i", strtotime($record->date_start)) }}</td>
             <td>
+                <div class="dropdown mb-1">
+                    <form action="{{ route('record.changeStatus', $record->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <input type="hidden" name="status" value="0">
+
+                        <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button"
+                           id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ __('buttons.record.statuses.' . $record->getStatusKey()) }}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#" data-id="<?= Record::STATUS_DONE ?>"
+                               onclick="this.closest('form').querySelector('input[name=status]').value = this.dataset.id;
+                                        this.closest('form').submit();"
+                            >{{ __('buttons.record.statuses.done') }}</a>
+
+                            <a class="dropdown-item" href="#" data-id="<?= Record::STATUS_NOT_DONE ?>"
+                               onclick="this.closest('form').querySelector('input[name=status]').value = this.dataset.id;
+                                        this.closest('form').submit();"
+                            >{{ __('buttons.record.statuses.not_done') }}</a>
+
+                            <a class="dropdown-item" href="#" data-id="<?= Record::STATUS_CANCELED ?>"
+                               onclick="this.closest('form').querySelector('input[name=status]').value = this.dataset.id;
+                                        this.closest('form').submit();"
+                            >{{ __('buttons.record.statuses.canceled') }}</a>
+
+                            <a class="dropdown-item" href="#" data-id="<?= Record::STATUS_MOVED ?>"
+                               onclick="this.closest('form').querySelector('input[name=status]').value = this.dataset.id;
+                                        this.closest('form').submit();"
+                            >{{ __('buttons.record.statuses.moved') }}</a>
+                        </div>
+                    </form>
+                </div>
+
                 <a href="{{ route('record.show', ['record' => $record->id]) }}"
                    class="btn btn-sm btn-outline-primary"><i class="fa fa-eye"></i></a>
 

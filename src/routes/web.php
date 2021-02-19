@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessContactController;
@@ -43,6 +44,7 @@ Route::group([
         Route::post('/business/store', [\App\Http\Controllers\BusinessController::class, 'store'])
             ->name('business.store');
 
+
         Route::group([
             'middleware' => [
                 'can:accessBusinessPanel',
@@ -52,6 +54,8 @@ Route::group([
             Route::resources(['record' => '\App\Http\Controllers\RecordController']);
             Route::resources(['feedback' => '\App\Http\Controllers\FeedbackController']);
             Route::resources(['address' => '\App\Http\Controllers\BusinessAddressController']);
+
+            Route::post('/record/changeStatus/{record}', [RecordController::class, 'changeStatus'])->name('record.changeStatus');
 
             Route::resource('time', '\App\Http\Controllers\ProcedureTimeController')->only(['store']);
             Route::get('/time/create/{procedure}', [ProcedureTimeController::class, 'create'])

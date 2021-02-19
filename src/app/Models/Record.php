@@ -43,10 +43,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Record extends Model
 {
-    const STATUS_NOT_DONE = 1;
+    const STATUS_NOT_DONE = 0;
     const STATUS_DONE = 1;
     const STATUS_CANCELED = 2;
     const STATUS_MOVED = 3;
+
+    const STATUS_KEYS = [
+        self::STATUS_NOT_DONE => 'not_done',
+        self::STATUS_DONE => 'done',
+        self::STATUS_CANCELED => 'canceled',
+        self::STATUS_MOVED => 'moved',
+    ];
 
     const GET_RECORDS_FOR_DAYS = 1;
 
@@ -64,6 +71,15 @@ class Record extends Model
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * Вернуть ключ статуса
+     * @return mixed|string
+     */
+    public function getStatusKey()
+    {
+        return self::STATUS_KEYS[$this->status] ?? '';
+    }
 
     /**
      * User

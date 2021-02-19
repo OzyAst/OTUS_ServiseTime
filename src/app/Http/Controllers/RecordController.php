@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Record\ChangeStatusRecordRequest;
 use App\Http\Requests\Record\UpdateAdminRecordRequest;
 use App\Http\Requests\Record\UpdateBusinessRecordRequest;
 use App\Models\Record;
@@ -65,6 +66,19 @@ class RecordController extends Controller
     public function update(UpdateBusinessRecordRequest $request, $record_id)
     {
         $this->recordService->updateForBusiness($request->getFormData(), $record_id, Auth::user());
+        return Redirect::to(action([self::class, 'index']));
+    }
+
+    /**
+     * Редактирование записи
+     * @param ChangeStatusRecordRequest $request
+     * @param $record_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changeStatus(ChangeStatusRecordRequest $request, int $record_id)
+    {
+        $status = $request->getFormData()['status'];
+        $this->recordService->changeStatusForBusiness($status, $record_id, Auth::user());
         return Redirect::to(action([self::class, 'index']));
     }
 
