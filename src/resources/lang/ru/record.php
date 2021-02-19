@@ -8,6 +8,7 @@ return [
 
     'table' => [
         'procedure_id' => 'Процедура',
+        'business_id' => 'Салон',
         'client_id' => 'Клиент',
         'time' => 'Время',
         'date_start' => 'Время начала',

@@ -28,6 +28,15 @@ class EloquentRecordRepository implements RecordRepositoryInterface
             ->get();
     }
 
+    public function findByUserIdInDate(int $user_id, Carbon $date_start, Carbon $date_end): ?Collection
+    {
+        return Record::whereClientId($user_id)
+            ->whereDate('date_start', '>=', $date_start)
+            ->whereDate('date_start', '<',  $date_end)
+            ->with(['procedure', 'business'])
+            ->get();
+    }
+
     public function countRecords(int $business_id, $date_start, $date_end): int
     {
         return Record::whereBusinessId($business_id)

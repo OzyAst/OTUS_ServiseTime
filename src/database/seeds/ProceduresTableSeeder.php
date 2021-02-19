@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Business;
+use App\Models\Procedure;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ProceduresTableSeeder extends Seeder
@@ -11,10 +14,14 @@ class ProceduresTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach (\App\Models\User::all() as $user) {
-            $business = \App\Models\Business::whereUserId($user->id)->first();
+        foreach (User::all() as $user) {
+            $business = Business::whereUserId($user->id)->first();
 
-            factory(\App\Models\Procedure::class, 3)->create([
+            if (!$business) {
+                continue;
+            }
+
+            factory(Procedure::class, 3)->create([
                 'business_id' => $business->id,
                 'worker_id' => $user->id,
             ]);

@@ -6,7 +6,7 @@
 
 @extends('layouts.main')
 
-@section('title', __('headers.business.index'))
+@section('title', __('headers.business.constructor'))
 
 @can('accessBusinessPanel')
     @section('header_button')

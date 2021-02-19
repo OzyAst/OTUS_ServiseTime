@@ -7,6 +7,7 @@ return [
     'menu' => [
         'home' => 'Главная',
         'business' => 'Салон',
+        'constructor' => 'Конструктор',
         'staff' => 'Персонал',
         'records' => 'Записи',
         'procedures' => 'Процедуры',

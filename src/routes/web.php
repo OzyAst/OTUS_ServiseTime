@@ -39,6 +39,7 @@ Route::group([
         ],
     ], function () {
         Route::get('/home', [HomeController::class, 'home'])->name('home');
+        Route::get('/home/business', [HomeController::class, 'business'])->name('home.business');
         Route::get('/business/create', [\App\Http\Controllers\BusinessController::class, 'create'])
             ->name('business.create');
         Route::post('/business/store', [\App\Http\Controllers\BusinessController::class, 'store'])

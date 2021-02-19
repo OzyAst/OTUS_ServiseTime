@@ -17,5 +17,10 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@admin.ru',
             'api_token' => 'OkGBYAypU1f8pnifAxPrZjhGaffb7cwsUGpvWjhRCE8Z3wto3FthBY01pUJm'
         ]);
+        factory(App\Models\User::class, 1)->create([
+            'user_role_id' => '2',
+            'email' => 'client@client.ru',
+            'api_token' => 'OkGBYAypU1f8pnifAxPrZjhGaffb7cwsUGpvWjhRCE8Z3wto3FthBY01pUJs'
+        ]);
     }
 }
