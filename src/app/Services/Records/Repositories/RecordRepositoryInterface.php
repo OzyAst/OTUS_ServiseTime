@@ -96,4 +96,11 @@ interface RecordRepositoryInterface
      * @return int
      */
     public function sumPriceRecords(int $business_id, $date_start, $date_end): int;
+
+    /**
+     * Получить популярные процедуры по кол-ву записей
+     * @param int $business_id
+     * @return \Illuminate\Support\Collection|null
+     */
+    public function getPopularProceduresByRecord(int $business_id): ?\Illuminate\Support\Collection;
 }

@@ -28,8 +28,11 @@ class RecordController extends Controller
     public function index()
     {
         $records = $this->recordService->getUserRecords(Auth::user());
+        $proceduresPopular = $this->recordService->getPopularProcedures(Auth::user()->business->id);
+
         return view('records.index', [
-            'records' => $records
+            'records' => $records,
+            'proceduresPopular' => $proceduresPopular
         ]);
     }
 

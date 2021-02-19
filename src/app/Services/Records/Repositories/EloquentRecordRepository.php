@@ -6,6 +6,7 @@ use App\Models\Record;
 use App\Services\Records\DTO\RecordCreateHandlerDTO;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class EloquentRecordRepository implements RecordRepositoryInterface
 {
@@ -99,5 +100,20 @@ class EloquentRecordRepository implements RecordRepositoryInterface
     {
         return Record::where('id', $record_id)->whereBusinessId($business_id)
             ->firstOrFail();
+    }
+
+    public function getPopularProceduresByRecord(int $business_id): ?\Illuminate\Support\Collection
+    {
+        return DB::table('records', 'r')
+            ->select([
+                DB::raw('count(*) as count'),
+                'p.name as procedure'
+            ])
+            ->where(['r.business_id' => $business_id])
+            ->groupBy('r.procedure_id')
+            ->leftJoin('procedures as p', 'r.procedure_id', '=', 'p.id')
+            ->orderBy('count', 'DESC')
+            ->limit(3)
+            ->get();
     }
 }

@@ -74,6 +74,16 @@ class RecordService
     }
 
     /**
+     * Получить популярные процедуры
+     * @param int $business_id
+     * @return \Illuminate\Support\Collection|null
+     */
+    public function getPopularProcedures(int $business_id): ?\Illuminate\Support\Collection
+    {
+        return $this->repository->getPopularProceduresByRecord($business_id);
+    }
+
+    /**
      * Получить записи за промежуток времени для пользователя
      * @param int $user_id
      * @param Carbon $date_start
