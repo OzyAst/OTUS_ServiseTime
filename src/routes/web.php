@@ -30,6 +30,9 @@ Route::group([
     Route::get('/localize/{locale}', [\App\Http\Controllers\LocalizeController::class, 'setLocale'])
         ->name('localize.set');
 
+    Route::get('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'show'])
+        ->name('business.show');
+
     /**
      * Страницы закрытые
      */
@@ -77,8 +80,6 @@ Route::group([
 
             Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'index'])
                 ->name('business.index');
-            Route::get('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'show'])
-                ->name('business.show');
             Route::get('/business/edit/{business}', [\App\Http\Controllers\BusinessController::class, 'edit'])
                 ->name('business.edit')
                 ->middleware("can:accessMyBusinessPanel,business");

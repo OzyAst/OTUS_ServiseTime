@@ -15,6 +15,7 @@ return [
         'address' => 'Адреса',
         'login' => 'Вход',
         'logout' => 'Выход',
+        'my_page' => 'Моя страница',
     ],
 
     'business' => [
