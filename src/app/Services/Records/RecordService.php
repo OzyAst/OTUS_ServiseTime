@@ -90,7 +90,7 @@ class RecordService
      * @param Carbon $date_end
      * @return Collection|null
      */
-    public function getRecordsForUserInDate(int $user_id, Carbon $date_start, Carbon $date_end)
+    public function getRecordsForUserInDate(int $user_id, Carbon $date_start, ?Carbon $date_end = NULL)
     {
         return $this->repository->findByUserIdInDate($user_id, $date_start, $date_end);
     }

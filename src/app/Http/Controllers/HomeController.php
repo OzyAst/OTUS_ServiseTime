@@ -47,8 +47,7 @@ class HomeController extends Controller
     {
         $myRecords = $this->recordService->getRecordsForUserInDate(
             Auth::user()->id,
-            Carbon::today(),
-            Carbon::tomorrow()
+            Carbon::today()
         );
 
         return view('home.index', [

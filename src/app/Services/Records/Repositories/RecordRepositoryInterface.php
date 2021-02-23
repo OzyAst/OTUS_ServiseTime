@@ -59,7 +59,7 @@ interface RecordRepositoryInterface
      * @param Carbon $date_end
      * @return Collection|null
      */
-    public function findByUserIdInDate(int $user_id, Carbon $date_start, Carbon $date_end): ?Collection;
+    public function findByUserIdInDate(int $user_id, Carbon $date_start, ?Carbon $date_end): ?Collection;
 
     /**
      * Найти записи по Procedure ID
