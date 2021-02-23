@@ -127,10 +127,10 @@ class RecordService
      * @param User $user
      * @return Record
      */
-    public function createForUser(array $data, User $user): Record
+    public function createForUser(array $data): Record
     {
-        $record = RecordCreateDTO::fromArray($data);
-        return $this->createHandler->handle($record, $user);
+        $recordDTO = RecordCreateDTO::fromArray($data);
+        return $this->createHandler->handle($recordDTO);
     }
 
     /**

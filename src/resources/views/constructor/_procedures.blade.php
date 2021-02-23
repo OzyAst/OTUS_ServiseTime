@@ -27,7 +27,7 @@
 
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary" id="timetable_modal_show"
                                 data-toggle="modal" data-target="#procedure_timetable"
-                                data-procedure_id="{{ $procedure->id }}">
+                                data-procedure_id="{{ $procedure->id }}" data-procedure_name="{{ $procedure->name }}">
                             {{ __('buttons.procedure.recording') }}
                         </button>
                     </div>

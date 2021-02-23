@@ -34,6 +34,17 @@ class ApiTranslatorService
     }
 
     /**
+     * Вернет данные для вывода календаря с расписанием для процедуры
+     * @param Record $record
+     * @return array|RecordWithProcedureDTO
+     */
+    public function translateRecordForCalendar(Record $record): array
+    {
+        $recordDTO = $this->apiRecordsForCalendarTranslator->translate($record);
+        return $recordDTO->toArray();
+    }
+
+    /**
      * Вернет данные для вывода информации о записи
      * @param Record $record
      * @return array

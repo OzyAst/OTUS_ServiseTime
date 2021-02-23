@@ -41,7 +41,7 @@ class RecordController extends Controller
         $records = $this->service->getProcedureRecords($procedure_id, $date_start, $date_end);
         $recordsList = $this->translatorService->translateRecordsForCalendar($records);
 
-        return response()->json($recordsList);
+        return response()->json(["success" => true, 'records' => $recordsList]);
     }
 
     /**
@@ -51,8 +51,10 @@ class RecordController extends Controller
      */
     public function store(StoreRecordRequest $request): JsonResponse
     {
-        $this->service->createForUser($request->getFormData(), Auth::user());
-        return response()->json(["success" => true]);
+        $record = $this->service->createForUser($request->getFormData(), Auth::user());
+        $recordTranslate = $this->translatorService->translateRecordForCalendar($record);
+
+        return response()->json(["success" => true, 'record' => $recordTranslate]);
     }
 
     /**

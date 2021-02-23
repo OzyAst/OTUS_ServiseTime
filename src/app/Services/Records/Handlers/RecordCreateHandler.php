@@ -3,7 +3,6 @@
 namespace App\Services\Records\Handlers;
 
 use App\Models\Record;
-use App\Models\User;
 use App\Services\Procedures\Repositories\ProcedureRepositoryInterface;
 use App\Services\Records\DTO\RecordCreateDTO;
 use App\Services\Records\DTO\RecordCreateHandlerDTO;
@@ -28,7 +27,7 @@ class RecordCreateHandler
         $this->procedureRepository = $procedureRepository;
     }
 
-    public function handle(RecordCreateDTO $DTO, User $user): Record
+    public function handle(RecordCreateDTO $DTO): Record
     {
         $procedure = $this->procedureRepository->find($DTO->procedure_id);
         if (!$procedure) {
@@ -37,7 +36,7 @@ class RecordCreateHandler
 
         $handlerDTO = RecordCreateHandlerDTO::fromArray(
             array_merge($DTO->toArray(), [
-                'client_id' => $user->id,
+                'date_end' => $procedure->duration + strtotime($DTO->date_start),
                 'business_id' => $procedure->business_id,
                 'price' => $procedure->price,
                 'user_create' => Auth::id(),

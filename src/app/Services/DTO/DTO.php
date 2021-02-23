@@ -53,7 +53,7 @@ abstract class DTO
         foreach ($properties as $key => $param) {
             // Если в переданном массиве нет нужного значения
             if (!isset($data[$key])) {
-                throw new \ArgumentCountError("Передано недостаточное количество аргументов");
+                throw new \ArgumentCountError("Передано недостаточное количество аргументов ($key)");
             }
 
             $method = self::PREFIX_SETTER . $key;

@@ -28,8 +28,8 @@ class StoreRecordRequest extends FormRequest
     {
         return [
             "procedure_id" => ['required', 'integer'],
-            "date_start" => ['required', 'date_format:"Y-m-d H:i:s"'],
-            "date_end" => ['required', 'date_format:"Y-m-d H:i:s"'],
+            "client_id" => ['required', 'integer'],
+            "date_start" => ['required', 'date_format:"Y-m-d H:i"'],
         ];
     }
 }

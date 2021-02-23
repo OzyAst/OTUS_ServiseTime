@@ -72,6 +72,10 @@ class Record extends Model
         'updated_at',
     ];
 
+    protected $attributes = [
+        'status' => self::STATUS_NOT_DONE,
+    ];
+
     /**
      * Вернуть ключ статуса
      * @return mixed|string
