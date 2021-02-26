@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Record\ChangeStatusRecordRequest;
-use App\Http\Requests\Record\UpdateAdminRecordRequest;
 use App\Http\Requests\Record\UpdateBusinessRecordRequest;
 use App\Models\Record;
 use App\Services\Records\RecordService;

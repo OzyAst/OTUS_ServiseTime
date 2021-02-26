@@ -59,7 +59,7 @@ class BusinessService
         $key = CacheKeyGeneration::getKey($prefix, $id);
 
         return Cache::remember($key, $ttl, function () use ($id) {
-            $business = $this->repository->find($id);
+            $business = $this->repository->findOrFail($id);
             $business->load(['procedures', 'type', 'address.contacts']);
 
             return $business;
