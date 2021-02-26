@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\Records\DTO\RecordCreateDTO;
 use App\Services\Records\DTO\RecordUpdateBusinessDTO;
 use App\Services\Records\DTO\RecordUpdateDTO;
+use App\Services\Records\Handlers\CancelUserRecordHandler;
 use App\Services\Records\Handlers\ChangeStatusRecordBusinessHandler;
 use App\Services\Records\Handlers\RecordBusinessDeleteHandler;
 use App\Services\Records\Handlers\RecordBusinessUpdateHandler;
@@ -28,6 +29,7 @@ class RecordService
     private RecordBusinessDeleteHandler $deleteBusinessHandler;
     private RecordBusinessUpdateHandler $businessUpdateHandler;
     private ChangeStatusRecordBusinessHandler $changeStatusRecordBusinessHandler;
+    private CancelUserRecordHandler $cancelUserRecordHandler;
 
     public function __construct(
         RecordRepositoryInterface $repository,
@@ -36,7 +38,8 @@ class RecordService
         RecordBusinessUpdateHandler $businessUpdateHandler,
         RecordClientDeleteHandler $deleteClientHandler,
         RecordBusinessDeleteHandler $deleteBusinessHandler,
-        ChangeStatusRecordBusinessHandler $changeStatusRecordBusinessHandler
+        ChangeStatusRecordBusinessHandler $changeStatusRecordBusinessHandler,
+        CancelUserRecordHandler $cancelUserRecordHandler
     ) {
         $this->repository = $repository;
         $this->createHandler = $createHandler;
@@ -45,6 +48,7 @@ class RecordService
         $this->deleteBusinessHandler = $deleteBusinessHandler;
         $this->businessUpdateHandler = $businessUpdateHandler;
         $this->changeStatusRecordBusinessHandler = $changeStatusRecordBusinessHandler;
+        $this->cancelUserRecordHandler = $cancelUserRecordHandler;
     }
 
     /**
@@ -166,6 +170,16 @@ class RecordService
     public function changeStatusForBusiness(int $status, int $record_id, User $user): void
     {
         $this->changeStatusRecordBusinessHandler->handle($status, $record_id, $user);
+    }
+
+    /**
+     * Отменить запись пользователя
+     * @param int $record_id
+     * @param User $user
+     */
+    public function cancelUserRecord(int $record_id, User $user): void
+    {
+        $this->cancelUserRecordHandler->handle($record_id, $user);
     }
 
     /**

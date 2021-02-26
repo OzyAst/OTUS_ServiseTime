@@ -86,6 +86,18 @@ class Record extends Model
     }
 
     /**
+     * Завершшена ли запись
+     * @return bool
+     */
+    public function isDone()
+    {
+        if (in_array($this->status, [self::STATUS_CANCELED, self::STATUS_DONE])) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * User
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */

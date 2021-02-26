@@ -7,7 +7,7 @@ return [
     'reset_password' => 'Сброс пароля',
     'register' => 'Too many login attempts. Please try again in :seconds seconds.',
 
-    'index' => 'Добро пожаловать!',
+    'index' => 'Мои записи',
 
     'business' => [
         'index' => 'Мой салон',

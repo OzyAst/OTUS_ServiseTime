@@ -60,6 +60,7 @@ Route::group([
             Route::resources(['address' => '\App\Http\Controllers\BusinessAddressController']);
 
             Route::post('/record/changeStatus/{record}', [RecordController::class, 'changeStatus'])->name('record.changeStatus');
+            Route::post('/record/cancel/{record}', [RecordController::class, 'cancel'])->name('record.cancel');
 
             Route::resource('time', '\App\Http\Controllers\ProcedureTimeController')->only(['store']);
             Route::get('/time/create/{procedure}', [ProcedureTimeController::class, 'create'])

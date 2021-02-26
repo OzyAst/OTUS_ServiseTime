@@ -73,7 +73,7 @@ class RecordController extends Controller
     }
 
     /**
-     * Редактирование записи
+     * Редактирование статуса записи
      * @param ChangeStatusRecordRequest $request
      * @param $record_id
      * @return \Illuminate\Http\RedirectResponse
@@ -82,6 +82,17 @@ class RecordController extends Controller
     {
         $status = $request->getFormData()['status'];
         $this->recordService->changeStatusForBusiness($status, $record_id, Auth::user());
+        return Redirect::back();
+    }
+
+    /**
+     * Отмена записи
+     * @param $record_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function cancel(int $record_id)
+    {
+        $this->recordService->cancelUserRecord($record_id, Auth::user());
         return Redirect::back();
     }
 
