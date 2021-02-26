@@ -17,7 +17,7 @@ use App\Services\Records\Handlers\RecordUpdateHandler;
 use App\Services\Records\Repositories\RecordRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RecordService
 {
@@ -58,11 +58,18 @@ class RecordService
      */
     public function getUserRecords(User $user): ?Collection
     {
-        if (Auth::guest() || !$user->business) {
-            return new Collection();
-        }
-
         return $this->repository->findByBusinessId($user->business->id);
+    }
+
+    /**
+     * Списк всех записей для салона c пагинацией
+     * @param User $user
+     * @param int $paginate
+     * @return LengthAwarePaginator
+     */
+    public function searchUserRecords(User $user, int $paginate = 20): LengthAwarePaginator
+    {
+        return $this->repository->searchByBusinessId($user->business->id, $paginate);
     }
 
     /**

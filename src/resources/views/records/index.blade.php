@@ -9,6 +9,8 @@
     <div class="row">
         <div class="col-md-8">
             @include('records._table')
+
+            {{ $records->links() }}
         </div>
         <div class="col-md-4">
             <h5 class="mb-3 text-right">Часто посещаемые</h5>

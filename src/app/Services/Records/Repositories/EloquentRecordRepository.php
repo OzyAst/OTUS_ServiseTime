@@ -6,6 +6,7 @@ use App\Models\Record;
 use App\Services\Records\DTO\RecordCreateHandlerDTO;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class EloquentRecordRepository implements RecordRepositoryInterface
@@ -19,6 +20,11 @@ class EloquentRecordRepository implements RecordRepositoryInterface
     public function findByBusinessId(int $business_id): ?Collection
     {
         return Record::whereBusinessId($business_id)->get();
+    }
+
+    public function searchByBusinessId(int $business_id, int $paginate): LengthAwarePaginator
+    {
+        return Record::whereBusinessId($business_id)->paginate($paginate);
     }
 
     public function findByBusinessIdInDate(int $business_id, Carbon $date_start, Carbon $date_end): ?Collection

@@ -6,6 +6,7 @@ use App\Models\Record;
 use App\Services\Records\DTO\RecordCreateHandlerDTO;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface RecordRepositoryInterface
 {
@@ -42,6 +43,14 @@ interface RecordRepositoryInterface
      * @return Collection|null
      */
     public function findByBusinessId(int $business_id): ?Collection;
+
+    /**
+     * Найти записи по Business ID c пагинацией
+     * @param int $business_id
+     * @param int $paginate
+     * @return LengthAwarePaginator
+     */
+    public function searchByBusinessId(int $business_id, int $paginate): LengthAwarePaginator;
 
     /**
      * Найти записи по Business ID за промежуток времени
