@@ -18,7 +18,7 @@
         </a>
 
         <div class="form-group text-left">
-            <label for="email">{{ __('E-Mail Address') }}</label>
+            <label for="email">{{ __('forms.auth.email') }}</label>
 
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                    value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -32,7 +32,7 @@
 
         <div class="form-group mb-0">
             <button type="submit" class="btn btn-primary">
-                {{ __('Send Password Reset Link') }}
+                {{ __('forms.auth.reset.send_reset_link') }}
             </button>
         </div>
     </form>

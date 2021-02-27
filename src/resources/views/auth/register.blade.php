@@ -11,7 +11,7 @@
         </a>
 
         <div class="form-group text-left">
-            <label for="name">{{ __('Name') }}</label>
+            <label for="name">{{ __('forms.auth.register.name') }}</label>
 
             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                    value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group text-left">
-            <label for="email">{{ __('E-Mail Address') }}</label>
+            <label for="email">{{ __('forms.auth.email') }}</label>
 
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                    value="{{ old('email') }}" required autocomplete="email">
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group text-left">
-            <label for="password">{{ __('Password') }}</label>
+            <label for="password">{{ __('forms.auth.password') }}</label>
 
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                    name="password" required autocomplete="new-password">
@@ -50,14 +50,14 @@
         </div>
 
         <div class="form-group text-left">
-            <label for="password-confirm">{{ __('Confirm Password') }}</label>
+            <label for="password-confirm">{{ __('forms.auth.register.confirm_password') }}</label>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
                    autocomplete="new-password">
         </div>
 
         <div class="form-group mb-0">
             <button type="submit" class="btn btn-primary">
-                {{ __('Register') }}
+                {{ __('forms.auth.register.register') }}
             </button>
         </div>
     </form>
