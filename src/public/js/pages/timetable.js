@@ -1,3 +1,8 @@
+$('body').on('click', '#procedure_show_all', function () {
+    $(".shadow-block").addClass("show");
+    $(this).hide();
+});
+
 $('body').on('click', '#timetable_modal_show', function () {
     var calendarEl = $("#procedure_timetable #calendar");
     var procedure = $(this).attr("data-procedure_id");

@@ -9,23 +9,23 @@
         <h1 class="display-4">{{ __('headers.constructor.procedure') }}</h1>
     </div>
 
-    <div class="container pb-4">
-        <div class="card-deck mb-3 text-center">
+    <div class="container pb-4 position-relative">
+        <div class="card-deck shadow-block">
             @forelse($business->procedures as $procedure)
-                <div class="card mb-4 shadow-sm">
+                <div class="card w-20 mb-4 shadow-sm flex-fill">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">{{ $procedure->name }}</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h1 class="card-title pricing-card-title">{{ $procedure->price }} р.</h1>
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>
-                                {{ __('procedure.table.duration') }}:
+                                {{ __('procedure.table.duration') }}: <br>
                                 <i class="far fa-clock"></i> {{ $procedure->duration }} мин.
                             </li>
                         </ul>
 
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary" id="timetable_modal_show"
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto" id="timetable_modal_show"
                                 data-toggle="modal" data-target="#procedure_timetable"
                                 data-procedure_id="{{ $procedure->id }}" data-procedure_name="{{ $procedure->name }}">
                             {{ __('buttons.procedure.recording') }}
@@ -39,9 +39,9 @@
             @endforelse
         </div>
 
-        @if($business->procedures->count() > 3)
-        <div class="text-center">
-            <a href="#">Все процедуры ...</a>
+        @if($business->procedures->count() > 4)
+        <div class="shadow-footer-button" id="procedure_show_all">
+            <a href="javascript:void(0);">Все процедуры ...</a>
         </div>
         @endif
     </div>
