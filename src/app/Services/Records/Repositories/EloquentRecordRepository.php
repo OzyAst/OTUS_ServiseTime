@@ -126,4 +126,80 @@ class EloquentRecordRepository implements RecordRepositoryInterface
             ->limit(3)
             ->get();
     }
+
+    public function sumPriceForProcedureGroupWorker(
+        int $business_id,
+        Carbon $date_start,
+        Carbon $date_end
+    ): ?\Illuminate\Support\Collection
+    {
+        return DB::table('records', 'r')
+            ->select([
+                DB::raw('count(*) as count'),
+                DB::raw('SUM(r.price) as sum_price'),
+                'p.name as procedure_name',
+                'p.price as price',
+                'p.id as procedure_id',
+            ])
+            ->where(['r.business_id' => $business_id, "r.status" => Record::STATUS_DONE])
+            ->whereDate('date_start', '>=', $date_start)
+            ->whereDate('date_start', '<=',  $date_end)
+            ->groupBy('r.procedure_id')
+            ->leftJoin('procedures as p', 'r.procedure_id', '=', 'p.id')
+            ->orderBy('count', 'DESC')
+            ->get();
+    }
+
+    public function countStatisticForRecords(
+        int $business_id,
+        Carbon $date_start,
+        Carbon $date_end
+    ): ?\Illuminate\Support\Collection
+    {
+        return DB::table('records', 'r')
+            ->select([
+                DB::raw('count(*) as count'),
+                DB::raw('SUM(r.price) as sum_price'),
+                'p.name as procedure_name',
+                'p.price as price',
+                'p.id as procedure_id',
+                'r.status',
+            ])
+            ->where(['r.business_id' => $business_id])
+            ->whereDate('date_start', '>=', $date_start)
+            ->whereDate('date_start', '<=',  $date_end)
+            ->groupBy('r.procedure_id', 'r.status')
+            ->leftJoin('procedures as p', 'r.procedure_id', '=', 'p.id')
+            ->orderBy('procedure_id', 'ASC')
+            ->orderBy('r.status', 'ASC')
+            ->get();
+    }
+
+    public function statisticRecordsGroupByClients(
+        int $business_id,
+        Carbon $date_start,
+        Carbon $date_end
+    ): ?\Illuminate\Support\Collection
+    {
+        return DB::table('records', 'r')
+            ->select([
+                DB::raw('count(*) as count'),
+                DB::raw('SUM(r.price) as sum_price'),
+                'p.name as procedure_name',
+                'p.price as price',
+                'p.id as procedure_id',
+                'r.client_id as client_id',
+                'c.name as client_name',
+                'r.status',
+            ])
+            ->where(['r.business_id' => $business_id])
+            ->whereDate('date_start', '>=', $date_start)
+            ->whereDate('date_start', '<=',  $date_end)
+            ->groupBy('r.client_id', 'r.status')
+            ->leftJoin('procedures as p', 'r.procedure_id', '=', 'p.id')
+            ->leftJoin('users as c', 'c.id', '=', 'r.client_id')
+            ->orderBy('client_id', 'ASC')
+            ->orderBy('r.status', 'ASC')
+            ->get();
+    }
 }

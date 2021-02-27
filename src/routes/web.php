@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\RecordController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessContactController;
@@ -74,9 +75,12 @@ Route::group([
             Route::get('/contact/create/{address}', [BusinessContactController::class, 'create'])
             ->name('contact.create');
 
+            Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
+            Route::get('/statistic/salary', [StatisticController::class, 'salary'])->name('statistic.salary');
+            Route::get('/statistic/records', [StatisticController::class, 'records'])->name('statistic.records');
+            Route::get('/statistic/clients', [StatisticController::class, 'clients'])->name('statistic.clients');
+
             Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'index']);
-            Route::get('/statistic', [\App\Http\Controllers\StatisticController::class, 'index'])
-                ->name('statistic.index');
             Route::get('/message', [\App\Http\Controllers\MessageController::class, 'index']);
 
             Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'index'])

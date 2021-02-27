@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Statistic\DTOs;
+namespace App\Services\Statistic\DTO;
 
 /**
  * Class StatisticRecordsDTO

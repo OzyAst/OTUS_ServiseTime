@@ -112,4 +112,45 @@ interface RecordRepositoryInterface
      * @return \Illuminate\Support\Collection|null
      */
     public function getPopularProceduresByRecord(int $business_id): ?\Illuminate\Support\Collection;
+
+    /**
+     * Подсчет заработанного на каждую процедуру с группировкой по работнику
+     * @param int $business_id
+     * @param $date_start
+     * @param $date_end
+     * @return mixed
+     */
+    public function sumPriceForProcedureGroupWorker(
+        int $business_id,
+        Carbon $date_start,
+        Carbon $date_end
+    ): ?\Illuminate\Support\Collection;
+
+    /**
+     * Статистика по записям на каждую процедуру,
+     * показывает кол-во завершенных/отмененных/перенесенных записей
+     * @param int $business_id
+     * @param Carbon $date_start
+     * @param Carbon $date_end
+     * @return mixed
+     */
+    public function countStatisticForRecords(
+        int $business_id,
+        Carbon $date_start,
+        Carbon $date_end
+    ): ?\Illuminate\Support\Collection;
+
+    /**
+     * Статистика по записям на каждого клиента,
+     * показывает кол-во завершенных/отмененных/перенесенных записей
+     * @param int $business_id
+     * @param Carbon $date_start
+     * @param Carbon $date_end
+     * @return mixed
+     */
+    public function statisticRecordsGroupByClients(
+        int $business_id,
+        Carbon $date_start,
+        Carbon $date_end
+    ): ?\Illuminate\Support\Collection;
 }

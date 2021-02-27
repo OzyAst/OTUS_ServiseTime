@@ -2,6 +2,8 @@
 
 namespace App\Services\DTO;
 
+use Illuminate\Support\Collection;
+
 abstract class DTO
 {
     const PREFIX_SETTER = "set";
@@ -42,7 +44,7 @@ abstract class DTO
      * @param array $data
      * @return DTO
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): self
     {
         $dto = new static();
         $properties = get_class_vars(static::class);
@@ -52,7 +54,7 @@ abstract class DTO
 
         foreach ($properties as $key => $param) {
             // Если в переданном массиве нет нужного значения
-            if (!isset($data[$key])) {
+            if (!array_key_exists($key, $data)) {
                 throw new \ArgumentCountError("Передано недостаточное количество аргументов ($key)");
             }
 
@@ -66,5 +68,28 @@ abstract class DTO
         }
 
         return $dto;
+    }
+
+    /**
+     * Заполнить массив dto из массива
+     * @param array $data
+     * @return array
+     */
+    public static function allFromArray(array $data): array
+    {
+        return array_map(function ($array) {
+            return self::fromArray($array);
+        }, $data);
+    }
+
+    /**
+     * Заполнить массив dto из колллекции
+     * @param Collection $collection
+     * @return array
+     */
+    public static function allFromCollection(Collection $collection): array
+    {
+        $collection = json_decode($collection, true);
+        return self::allFromArray($collection);
     }
 }

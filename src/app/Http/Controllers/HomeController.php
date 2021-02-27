@@ -65,7 +65,7 @@ class HomeController extends Controller
             return redirect('/business/create');
         }
 
-        $statisticToday = $this->statisticService->getStatusToday();
+        $statisticToday = $this->statisticService->getStatusToday(Auth::user()->business->id);
         $records = $this->recordService->getRecordsForBusinessInDate(
             Auth::user()->business->id,
             Carbon::today(),
