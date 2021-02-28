@@ -23,9 +23,4 @@ class RecordCreateHandlerDTO extends DTO
     protected string $date_end;
     protected float $price;
     protected int $user_create;
-
-    public function setDate_end($value)
-    {
-        $this->date_end = date("Y-m-d H:i", strtotime($value));
-    }
 }

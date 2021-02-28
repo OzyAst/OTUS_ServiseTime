@@ -8,6 +8,7 @@ use App\Services\Records\DTO\RecordCreateDTO;
 use App\Services\Records\DTO\RecordCreateHandlerDTO;
 use App\Services\Records\Repositories\RecordRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 /**
  * Добавление записи
@@ -36,7 +37,7 @@ class RecordCreateHandler
 
         $handlerDTO = RecordCreateHandlerDTO::fromArray(
             array_merge($DTO->toArray(), [
-                'date_end' => $procedure->duration + strtotime($DTO->date_start),
+                'date_end' => Carbon::parse($DTO->date_start)->addMinutes($procedure->duration)->format("Y-m-d H:i"),
                 'business_id' => $procedure->business_id,
                 'price' => $procedure->price,
                 'user_create' => Auth::id(),
