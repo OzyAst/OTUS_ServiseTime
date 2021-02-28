@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
@@ -31,9 +32,6 @@ Route::group([
     Route::get('/localize/{locale}', [\App\Http\Controllers\LocalizeController::class, 'setLocale'])
         ->name('localize.set');
 
-    Route::get('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'show'])
-        ->name('business.show');
-
     /**
      * Страницы закрытые
      */
@@ -44,10 +42,8 @@ Route::group([
     ], function () {
         Route::get('/home', [HomeController::class, 'home'])->name('home');
         Route::get('/home/business', [HomeController::class, 'business'])->name('home.business');
-        Route::get('/business/create', [\App\Http\Controllers\BusinessController::class, 'create'])
-            ->name('business.create');
-        Route::post('/business/store', [\App\Http\Controllers\BusinessController::class, 'store'])
-            ->name('business.store');
+        Route::get('/business/create', [BusinessController::class, 'create'])->name('business.create');
+        Route::post('/business/store', [BusinessController::class, 'store'])->name('business.store');
 
 
         Route::group([
@@ -83,19 +79,18 @@ Route::group([
             Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'index']);
             Route::get('/message', [\App\Http\Controllers\MessageController::class, 'index']);
 
-            Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'index'])
-                ->name('business.index');
-            Route::get('/business/edit/{business}', [\App\Http\Controllers\BusinessController::class, 'edit'])
-                ->name('business.edit')
+            Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
+            Route::get('/business/edit/{business}', [BusinessController::class, 'edit'])->name('business.edit')
                 ->middleware("can:accessMyBusinessPanel,business");
-            Route::patch('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'update'])
-                ->name('business.update')
+            Route::patch('/business/{business}', [BusinessController::class, 'update'])->name('business.update')
                 ->middleware("can:accessMyBusinessPanel,business");
-            Route::delete('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'destroy'])
-                ->name('business.destroy')
+            Route::delete('/business/{business}', [BusinessController::class, 'destroy'])->name('business.destroy')
                 ->middleware("can:accessMyBusinessPanel,business");
         });
     });
+
+
+    Route::get('/business/{business}', [BusinessController::class, 'show'])->name('business.show');
 });
 
 /**
