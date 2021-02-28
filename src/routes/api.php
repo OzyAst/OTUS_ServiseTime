@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => '/v1',
+    'as' => 'api.',
     'middleware' => [
         'auth:api',
     ],
 ], function () {
     Route::apiResource('record', '\App\Http\Controllers\Api\RecordController')->except(['index']);
-    Route::get('/procedure/{procedure_id}/record', [RecordController::class, 'index'])
-        ->name('record.index');
+    Route::get('/procedure/{procedure_id}/record', [RecordController::class, 'index']);
 });
