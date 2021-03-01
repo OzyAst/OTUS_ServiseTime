@@ -153,4 +153,13 @@ interface RecordRepositoryInterface
         Carbon $date_start,
         Carbon $date_end
     ): ?\Illuminate\Support\Collection;
+
+    /**
+     * Кол-во записей в интервале времени для процедуры
+     * @param int $procedure_id
+     * @param string $date_start
+     * @param string $date_end
+     * @return int
+     */
+    public function countRecordsByProcedure(int $procedure_id, string $date_start, string $date_end): int;
 }

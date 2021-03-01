@@ -202,4 +202,14 @@ class EloquentRecordRepository implements RecordRepositoryInterface
             ->orderBy('r.status', 'ASC')
             ->get();
     }
+
+    public function countRecordsByProcedure(int $procedure_id, string $date_start, string $date_end): int
+    {
+        return Record::whereProcedureId($procedure_id)
+            ->where(function ($query) use ($date_start, $date_end) {
+                $query->whereBetween('date_start', [$date_start, $date_end])
+                    ->orWhereBetween('date_end', [$date_start, $date_end]);
+            })
+            ->count();
+    }
 }

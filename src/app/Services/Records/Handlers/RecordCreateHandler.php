@@ -44,7 +44,25 @@ class RecordCreateHandler
             ])
         );
 
+        if (!$this->checkRecordingAvailability($handlerDTO)) {
+            throw new \InvalidArgumentException("Данная процедура занята на это время");
+        }
+
         $record = $this->repository->create($handlerDTO);
         return $record;
+    }
+
+    /**
+     * Проверить возможна ли запись
+     * @param RecordCreateHandlerDTO $dto
+     * @return bool
+     */
+    private function checkRecordingAvailability(RecordCreateHandlerDTO $dto): bool
+    {
+        if ($this->repository->countRecordsByProcedure($dto->procedure_id, $dto->date_start, $dto->date_end)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
