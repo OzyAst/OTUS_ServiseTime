@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "ext-json": "*",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
@@ -16,7 +17,7 @@
         "laravel/framework": "^7.0",
         "laravel/horizon": "4.3.5",
         "laravel/tinker": "^2.0",
-        "ozycast/service-time-calendar": "0.0.2",
+        "ozycast/service-time-calendar": "^0.2.0",
         "predis/predis": "^1.1"
     },
     "require-dev": {

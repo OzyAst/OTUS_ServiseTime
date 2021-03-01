@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2690470482c7ec981b7af1ec9d95dee8",
+    "content-hash": "2e6013a2dc4354a8f79a1182a1261244",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2079,16 +2079,16 @@
         },
         {
             "name": "ozycast/service-time-calendar",
-            "version": "v0.0.2",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OzyAst/OTUS_ServiseTime_package.git",
-                "reference": "d3a37a49285c8d4a631f91279b6b3a4976b2b58d"
+                "reference": "db5b67c043f6be2699304420f22b21c4e38cc3e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OzyAst/OTUS_ServiseTime_package/zipball/d3a37a49285c8d4a631f91279b6b3a4976b2b58d",
-                "reference": "d3a37a49285c8d4a631f91279b6b3a4976b2b58d",
+                "url": "https://api.github.com/repos/OzyAst/OTUS_ServiseTime_package/zipball/db5b67c043f6be2699304420f22b21c4e38cc3e4",
+                "reference": "db5b67c043f6be2699304420f22b21c4e38cc3e4",
                 "shasum": ""
             },
             "require": {
@@ -2126,9 +2126,9 @@
             "description": "Calendar with timetable for site ServiceTime",
             "support": {
                 "issues": "https://github.com/OzyAst/OTUS_ServiseTime_package/issues",
-                "source": "https://github.com/OzyAst/OTUS_ServiseTime_package/tree/v0.0.2"
+                "source": "https://github.com/OzyAst/OTUS_ServiseTime_package/tree/0.2.0"
             },
-            "time": "2021-01-08T10:22:27+00:00"
+            "time": "2021-02-28T12:31:41+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -8655,7 +8655,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
