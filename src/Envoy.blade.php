@@ -31,6 +31,7 @@
     git
     composer
     config
+    publish
     migration
     test
     frontend
