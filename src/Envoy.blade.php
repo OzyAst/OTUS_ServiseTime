@@ -9,7 +9,7 @@
     $DIR_ENV = $DIR . '/.env';
 
     $URL_GIT = 'https://github.com/OzyAst/OTUS_ServiseTime.git';
-    $GIT_BRANCH = 'master';
+    $GIT_BRANCH = 'f_project';
 @endsetup
 
 @import('resources/envoy/before-deploy.blade.php')
@@ -21,6 +21,7 @@
 @import('resources/envoy/frontend-build.blade.php')
 @import('resources/envoy/cache.blade.php')
 @import('resources/envoy/access.blade.php')
+@import('resources/envoy/publish.blade.php')
 @import('resources/envoy/active-release.blade.php')
 @import('resources/envoy/workers.blade.php')
 @import('resources/envoy/remove-old-release.blade.php')
