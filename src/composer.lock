@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e6013a2dc4354a8f79a1182a1261244",
+    "content-hash": "0ec9cb4f9cab007d5e57bdb4bfddbf68",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2079,16 +2079,16 @@
         },
         {
             "name": "ozycast/service-time-calendar",
-            "version": "0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OzyAst/OTUS_ServiseTime_package.git",
-                "reference": "db5b67c043f6be2699304420f22b21c4e38cc3e4"
+                "reference": "919ea72bdc02a5b469ace179e2f153cec2014c0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OzyAst/OTUS_ServiseTime_package/zipball/db5b67c043f6be2699304420f22b21c4e38cc3e4",
-                "reference": "db5b67c043f6be2699304420f22b21c4e38cc3e4",
+                "url": "https://api.github.com/repos/OzyAst/OTUS_ServiseTime_package/zipball/919ea72bdc02a5b469ace179e2f153cec2014c0f",
+                "reference": "919ea72bdc02a5b469ace179e2f153cec2014c0f",
                 "shasum": ""
             },
             "require": {
@@ -2126,9 +2126,9 @@
             "description": "Calendar with timetable for site ServiceTime",
             "support": {
                 "issues": "https://github.com/OzyAst/OTUS_ServiseTime_package/issues",
-                "source": "https://github.com/OzyAst/OTUS_ServiseTime_package/tree/0.2.0"
+                "source": "https://github.com/OzyAst/OTUS_ServiseTime_package/tree/v0.2.1"
             },
-            "time": "2021-02-28T12:31:41+00:00"
+            "time": "2021-03-01T13:40:10+00:00"
         },
         {
             "name": "phpoption/phpoption",

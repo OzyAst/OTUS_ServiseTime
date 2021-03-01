@@ -17,7 +17,7 @@
         "laravel/framework": "^7.0",
         "laravel/horizon": "4.3.5",
         "laravel/tinker": "^2.0",
-        "ozycast/service-time-calendar": "^0.2.0",
+        "ozycast/service-time-calendar": "^0.2",
         "predis/predis": "^1.1"
     },
     "require-dev": {
