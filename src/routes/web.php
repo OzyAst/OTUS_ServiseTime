@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\OAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessContactController;
@@ -104,3 +105,5 @@ Route::group([
 });
 
 Auth::routes();
+Route::get('/oauth/redirect', [OAuthController::class, 'redirect'])->name('oauth.redirect');
+Route::get('/oauth/callback', [OAuthController::class, 'callback'])->name('oauth.callback');
