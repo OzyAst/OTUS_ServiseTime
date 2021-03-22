@@ -22,5 +22,5 @@ Route::group([
     ],
 ], function () {
     Route::apiResource('record', '\App\Http\Controllers\Api\RecordController')->except(['index']);
-    Route::get('/procedure/{procedure_id}/record', [RecordController::class, 'index']);
+    Route::get('/procedure/{procedure_id}/record', [RecordController::class, 'index'])->name('record.index');
 });

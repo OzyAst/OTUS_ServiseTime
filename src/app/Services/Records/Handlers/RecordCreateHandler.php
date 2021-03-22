@@ -45,7 +45,7 @@ class RecordCreateHandler
         );
 
         if (!$this->checkRecordingAvailability($handlerDTO)) {
-            throw new \InvalidArgumentException("Данная процедура занята на это время");
+            throw new \InvalidArgumentException("It's time busy");
         }
 
         $record = $this->repository->create($handlerDTO);
