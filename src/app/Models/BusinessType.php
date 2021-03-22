@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $name
+ * @property string $key
  * @property string $description
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BusinessType newModelQuery()
@@ -24,6 +25,7 @@ class BusinessType extends Model
     public $fillable = [
         'id',
         'name',
+        'key',
         'description',
     ];
 

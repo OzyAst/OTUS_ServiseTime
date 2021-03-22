@@ -15,6 +15,13 @@ interface BusinessRepositoryInterface
     public function find(int $id): ?Business;
 
     /**
+     * Найти запись по ID или вернуть ошибку
+     * @param int $id
+     * @return Business|null
+     */
+    public function findOrFail(int $id): ?Business;
+
+    /**
      * Вернет салон пользователя
      * @param int $user_id
      * @return Business|null

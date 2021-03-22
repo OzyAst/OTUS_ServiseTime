@@ -4,7 +4,6 @@ namespace App\Services\Businesses\Repositories;
 
 use App\Models\Business;
 use App\Services\Businesses\DTOs\BusinessHandlerDTO;
-use Illuminate\Database\Eloquent\Collection;
 
 class EloquentBusinessRepository implements BusinessRepositoryInterface
 {
@@ -12,6 +11,11 @@ class EloquentBusinessRepository implements BusinessRepositoryInterface
     public function find(int $id): ?Business
     {
         return Business::find($id);
+    }
+
+    public function findOrFail(int $id): ?Business
+    {
+        return Business::findOrFail($id);
     }
 
     public function findByUserId(int $user_id): ?Business

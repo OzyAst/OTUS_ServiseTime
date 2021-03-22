@@ -11,7 +11,9 @@
 |
 */
 
-use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\RecordController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessContactController;
@@ -30,9 +32,6 @@ Route::group([
     Route::get('/localize/{locale}', [\App\Http\Controllers\LocalizeController::class, 'setLocale'])
         ->name('localize.set');
 
-    // API получение записей для календаря (пакет)
-    Route::get('/timetable/{procedure_id}', [TimetableController::class, 'index']);
-
     /**
      * Страницы закрытые
      */
@@ -42,10 +41,11 @@ Route::group([
         ],
     ], function () {
         Route::get('/home', [HomeController::class, 'home'])->name('home');
-        Route::get('/business/create', [\App\Http\Controllers\BusinessController::class, 'create'])
-            ->name('business.create');
-        Route::post('/business/store', [\App\Http\Controllers\BusinessController::class, 'store'])
-            ->name('business.store');
+        Route::get('/home/business', [HomeController::class, 'business'])->name('home.business');
+        Route::get('/business/create', [BusinessController::class, 'create'])->name('business.create');
+        Route::post('/business/store', [BusinessController::class, 'store'])->name('business.store');
+
+        Route::post('/record/cancel/{record}', [RecordController::class, 'cancel'])->name('record.cancel');
 
         Route::group([
             'middleware' => [
@@ -57,7 +57,9 @@ Route::group([
             Route::resources(['feedback' => '\App\Http\Controllers\FeedbackController']);
             Route::resources(['address' => '\App\Http\Controllers\BusinessAddressController']);
 
-            Route::resource('time', ProcedureTimeController::class)->only(['store']);
+            Route::post('/record/changeStatus/{record}', [RecordController::class, 'changeStatus'])->name('record.changeStatus');
+
+            Route::resource('time', '\App\Http\Controllers\ProcedureTimeController')->only(['store']);
             Route::get('/time/create/{procedure}', [ProcedureTimeController::class, 'create'])
                 ->name('time.create');
             Route::get('/time/edit/{procedure}', [ProcedureTimeController::class, 'edit'])
@@ -65,30 +67,30 @@ Route::group([
             Route::patch('/time/{procedure}', [ProcedureTimeController::class, 'update'])
                 ->name('time.update');
 
-            Route::resource('contact',BusinessContactController::class)->except(['create']);
+            Route::resource('contact','\App\Http\Controllers\BusinessContactController')->except(['create']);
             Route::get('/contact/create/{address}', [BusinessContactController::class, 'create'])
             ->name('contact.create');
 
+            Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
+            Route::get('/statistic/salary', [StatisticController::class, 'salary'])->name('statistic.salary');
+            Route::get('/statistic/records', [StatisticController::class, 'records'])->name('statistic.records');
+            Route::get('/statistic/clients', [StatisticController::class, 'clients'])->name('statistic.clients');
+
             Route::get('/staff', [\App\Http\Controllers\StaffController::class, 'index']);
-            Route::get('/statistic', [\App\Http\Controllers\StatisticController::class, 'index'])
-                ->name('statistic.index');
             Route::get('/message', [\App\Http\Controllers\MessageController::class, 'index']);
 
-            Route::get('/business', [\App\Http\Controllers\BusinessController::class, 'index'])
-                ->name('business.index');
-            Route::get('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'show'])
-                ->name('business.show');
-            Route::get('/business/edit/{business}', [\App\Http\Controllers\BusinessController::class, 'edit'])
-                ->name('business.edit')
+            Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
+            Route::get('/business/edit/{business}', [BusinessController::class, 'edit'])->name('business.edit')
                 ->middleware("can:accessMyBusinessPanel,business");
-            Route::patch('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'update'])
-                ->name('business.update')
+            Route::patch('/business/{business}', [BusinessController::class, 'update'])->name('business.update')
                 ->middleware("can:accessMyBusinessPanel,business");
-            Route::delete('/business/{business}', [\App\Http\Controllers\BusinessController::class, 'destroy'])
-                ->name('business.destroy')
+            Route::delete('/business/{business}', [BusinessController::class, 'destroy'])->name('business.destroy')
                 ->middleware("can:accessMyBusinessPanel,business");
         });
     });
+
+
+    Route::get('/business/{business}', [BusinessController::class, 'show'])->name('business.show');
 });
 
 /**

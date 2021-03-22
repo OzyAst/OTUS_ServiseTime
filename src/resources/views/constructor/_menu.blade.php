@@ -12,5 +12,27 @@
         <a class="p-2 text-dark" href="#feedback">{{ __('constructor.feedback') }}</a>
         <a class="p-2 text-dark" href="#timetable">{{ __('constructor.timetable') }}</a>
     </nav>
-    <a class="btn btn-outline-primary" href="#">Sign up</a>
+
+    @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+                <a href="{{ route('home') }}" class="btn btn-sm btn-outline-success">
+                    <i class="far fa-user-circle"></i> {{ __('buttons.menu.my_page') }}
+                </a>
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button class="btn btn-sm btn-outline-danger">
+                        <i class="fa fa-sign-out-alt"></i> {{ __('buttons.menu.logout') }}
+                    </button>
+                </form>
+            @endauth
+            @guest
+                <a class="btn btn-outline-primary" href="{{ route('login') }}">Вход</a>
+
+                @if (Route::has('register'))
+                    <a class="btn btn-success ml-2" href="{{ route('register') }}">Регистрация</a>
+                @endif
+            @endauth
+        </div>
+    @endif
 </div>

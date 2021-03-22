@@ -7,8 +7,9 @@
     </h5>
     <ul class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="{{ route('home') }}">{{ __('buttons.menu.home') }}</a>
+        <a class="p-2 text-dark" href="{{ route('home.business') }}">{{ __('buttons.menu.business') }}</a>
         @can('accessBusinessPanel')
-            <a class="p-2 text-dark" href="{{ route('business.index') }}">{{ __('buttons.menu.business') }}</a>
+            <a class="p-2 text-dark" href="{{ route('business.index') }}">{{ __('buttons.menu.constructor') }}</a>
 {{--            <a class="p-2 text-dark" href="{{ route('staff.index') }}">{{ __('buttons.menu.staff') }}</a>--}}
             <a class="p-2 text-dark" href="{{ route('record.index') }}">{{ __('buttons.menu.records') }}</a>
             <a class="p-2 text-dark" href="{{ route('procedure.index') }}">{{ __('buttons.menu.procedures') }}</a>

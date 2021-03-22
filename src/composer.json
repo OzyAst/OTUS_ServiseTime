@@ -9,13 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "ext-json": "*",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
+        "laravel/horizon": "4.3.5",
         "laravel/tinker": "^2.0",
-        "ozycast/service-time-calendar": "0.0.2",
+        "ozycast/service-time-calendar": "^0.2",
         "predis/predis": "^1.1"
     },
     "require-dev": {
@@ -23,6 +25,7 @@
         "barryvdh/laravel-ide-helper": "^2.7",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
+        "laravel/envoy": "^2.5",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^8.5",

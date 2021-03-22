@@ -11,7 +11,7 @@
         </a>
 
         <div class="form-group text-left">
-            <label for="email">{{ __('E-Mail Address') }}</label>
+            <label for="email">{{ __('forms.auth.email') }}</label>
 
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                    value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group text-left">
-            <label for="password">{{ __('Password') }}</label>
+            <label for="password">{{ __('forms.auth.password') }}</label>
 
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                    name="password" required autocomplete="current-password">
@@ -42,19 +42,19 @@
                        id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                 <label class="form-check-label" for="remember">
-                    {{ __('Remember Me') }}
+                    {{ __('forms.auth.login.remember_me') }}
                 </label>
             </div>
         </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">
-                {{ __('Login') }}
+                {{ __('forms.auth.login.login') }}
             </button>
 
             @if (Route::has('password.request'))
                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
+                    {{ __('forms.auth.login.forgot_your_password') }}
                 </a>
             @endif
         </div>

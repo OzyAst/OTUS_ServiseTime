@@ -14,12 +14,16 @@ use App\Models\UserRole;
  */
 trait UserActingAs
 {
-    public function userActingAs() {
-        $role = factory(UserRole::class)->create();
-        $this->user = factory(User::class)->create([
-            'user_role_id' => $role->id,
-        ]);
+    public function userActingAs(User $user = null, string $driver = "") {
+        if (!$user) {
+            $role = factory(UserRole::class)->create();
+            $this->user = factory(User::class)->create([
+                'user_role_id' => $role->id,
+            ]);
+        } else {
+            $this->user = $user;
+        }
 
-        $this->actingAs($this->user);
+        $this->actingAs($this->user, $driver);
     }
 }

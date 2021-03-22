@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProcedureTime\StoreProcedureTimeRequest;
 use App\Http\Requests\ProcedureTime\UpdateProcedureTimeRequest;
-use App\Models\BusinessContact;
 use App\Models\Procedure;
 use App\Services\ProcedureTimes\ProcedureTimeService;
 use App\Services\Week\Week;

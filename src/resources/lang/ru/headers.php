@@ -7,10 +7,11 @@ return [
     'reset_password' => 'Сброс пароля',
     'register' => 'Too many login attempts. Please try again in :seconds seconds.',
 
-    'index' => 'Добро пожаловать!',
+    'index' => 'Мои записи',
 
     'business' => [
-        'index' => 'Ваша страница',
+        'index' => 'Мой салон',
+        'constructor' => 'Ваша страница',
         'add' => 'Добавление салона',
         'edit' => 'Редактирование',
     ],
@@ -56,6 +57,7 @@ return [
 
     'records' => [
         'history' => 'История записей',
+        'edit' => 'Редактирование',
     ],
 
     'staff' => [
@@ -64,6 +66,9 @@ return [
 
     'statistic' => [
         'index' => 'Статистика',
+        'salary' => 'Статистика по зарплате',
+        'records' => 'Статистика по записям',
+        'clients' => 'Статистика по клиентам',
     ],
 
 ];

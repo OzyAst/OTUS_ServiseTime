@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\RecordController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => '/v1',
+    'as' => 'api.',
+    'middleware' => [
+        'auth:api',
+    ],
+], function () {
+    Route::apiResource('record', '\App\Http\Controllers\Api\RecordController')->except(['index']);
+    Route::get('/procedure/{procedure_id}/record', [RecordController::class, 'index'])->name('record.index');
 });

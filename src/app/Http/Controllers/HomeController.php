@@ -4,24 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Services\Records\RecordService;
 use App\Services\Statistic\StatisticService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * @var RecordService
-     */
-    private $recordService;
-    /**
-     * @var StatisticService
-     */
-    private $statisticService;
+    private RecordService $recordService;
+    private StatisticService $statisticService;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct(
         RecordService $recordService,
         StatisticService $statisticService
@@ -39,7 +29,11 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return redirect('/home');
+            if (Auth::user()->business) {
+                return redirect('/home/business');
+            } else {
+                return redirect('/home');
+            }
         }
 
         return view('home.landing');
@@ -51,10 +45,34 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $statisticToday = $this->statisticService->getStatusToday();
-        $records = $this->recordService->getUserRecords(Auth::user());
+        $myRecords = $this->recordService->getRecordsForUserInDate(
+            Auth::user()->id,
+            Carbon::today()
+        );
 
         return view('home.index', [
+            'myRecords' => $myRecords,
+        ]);
+    }
+
+    /**
+     * Главная страница бизнеса
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function business()
+    {
+        if (!Auth::user()->business) {
+            return redirect('/business/create');
+        }
+
+        $statisticToday = $this->statisticService->getStatusToday(Auth::user()->business->id);
+        $records = $this->recordService->getRecordsForBusinessInDate(
+            Auth::user()->business->id,
+            Carbon::today(),
+            Carbon::tomorrow()
+        );
+
+        return view('home.business', [
             'records' => $records,
             'statistic' => $statisticToday,
         ]);

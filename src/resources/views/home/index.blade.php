@@ -6,12 +6,6 @@
 
     @include('blocks._header')
 
-    @can('accessBusinessPanel')
-        @include('records._table')
-
-        @include('statistic._small')
-    @else
-        @include('business._empty')
-    @endcan
+    @include('records._user_records_table', ['records' => $myRecords])
 
 @stop

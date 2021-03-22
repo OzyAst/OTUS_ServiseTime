@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\BusinessType;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class BusinessesTableSeeder extends Seeder
@@ -11,9 +13,10 @@ class BusinessesTableSeeder extends Seeder
      */
     public function run()
     {
-        $types = \App\Models\BusinessType::all();
+        $types = BusinessType::all();
+        $users = User::where(["user_role_id" => 1])->get();
 
-        foreach (\App\Models\User::all() as $user) {
+        foreach ($users as $user) {
             $key = rand(0, count($types) - 1);
 
             factory(\App\Models\Business::class, 1)->create([

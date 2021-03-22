@@ -4,6 +4,25 @@
  * Текста для страниц business
  */
 return [
+    'auth' => [
+        'email' => 'Email адрес',
+        'password' => 'Пароль',
+
+        'login' => [
+            'remember_me' => 'Запомнить меня',
+            'login' => 'Вход',
+            'forgot_your_password' => 'Забыли пароль?',
+        ],
+        'reset' => [
+            'send_reset_link' => 'Отправить'
+        ],
+        'register' => [
+            'name' => 'Имя',
+            'confirm_password' => 'Подтверждение пароля',
+            'register' => 'Зарегистрировать',
+        ]
+    ],
+
     'business' => [
         'add' => [
             'name' => 'Название',
@@ -18,6 +37,16 @@ return [
             'duration' => 'Продолжительность',
             'price' => 'Цена',
             'people_count' => 'Кол-во человек',
+        ]
+    ],
+
+    'records' => [
+        'add' => [
+            'client_id' => 'Клиент',
+            'date_start' => 'Время начала',
+            'date_end' => 'Время окончания',
+            'status' => 'Статус',
+            'price' => 'Цена',
         ]
     ],
 

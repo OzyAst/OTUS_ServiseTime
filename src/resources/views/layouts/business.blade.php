@@ -33,7 +33,6 @@
 
 <script src="{{ mix('/js/app.js') }}"></script>
 @stack('scripts')
-<script src="/js/vendors/fullcalendar.min.js"></script>
 <script src="/js/pages/map-google.js"></script>
 <script src="/js/pages/timetable.js"></script>
 
